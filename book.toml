@@ -1,0 +1,13 @@
+[book]
+title = "Successful Lisp - 한국어판"
+description = "Successful Lisp"
+language = "kr"
+multilingual = false
+src = "src"
+
+[output.html]
+no-section-label = true
+site-url = "/successful-lisp-kr/"
+git-repository-url = "https://github.com/lispkorea/successful-lisp-kr"
+git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/lispkorea/successful-lisp-kr/edit/main/{path}"
