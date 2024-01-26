@@ -37,7 +37,7 @@ var-1
 ;;=> VAR-2
 
 var-2
-;;>| Error: Unbound variable :TODO(pyoung)
+;;>| Error: Unbound variable
 
 (set var-1 99)
 ;;=> 99
