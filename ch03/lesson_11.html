@@ -223,9 +223,9 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 ------------------------------
 &lt;tab&gt; &lt;space&gt; &lt;page&gt; &lt;newline&gt; &lt;return&gt; &lt;linefeed&gt;
 </code></pre>
-<p>READ가 구성문자(constituent character)로 시작한다면, 이는 심볼이나 number를 축적합니다. READ가 종료매크로문자(terminating macro character)나 공백문자(whitespace character)를 만나면, 이는 모아진 구성문자를 우선 숫자로, 그 다음 symbol로 이해interpret하려 시도합니다. 수치화 해석이 가능하다면, READ는 숫자를 반환합니다. 그렇지 않으면, READ는 영문자를 standard case(보통 대문자)로 바꾸어, symbol로써 이름을 intern하여, 심볼을 반환합니다.</p>
+<p><code>READ</code>가 구성문자(constituent character)로 시작한다면, 이는 심볼이나 숫자를 축적합니다. <code>READ</code>가 종료 매크로 문자(terminating macro character)나 공백 문자(whitespace character)를 만나면, 이는 모아진 구성문자를 우선 숫자로, 그 다음 symbol로 이해interpret하려 시도합니다. 수치화 해석이 가능하다면, <code>READ</code>는 숫자를 반환합니다. 그렇지 않으면, <code>READ</code>는 영문자를 standard case(보통은 대문자)로 바꾸어, 심볼로써 이름을 intern하여, 심볼을 반환합니다.</p>
 <p>예외문자(Escape characters)는 특별한 역활을 수행합니다. 하나의 예외문자는 다음에 나오는 문자를 마치 constituent character처럼 다루도록 합니다. 보통 공백이나 종료매크로문자로 취급되는 문자는 심볼의 일부가 될 수 있습니다. READ가 escape character를 만나면, 숫자들로만 된것이 escape될지라도, constituents 결과를 숫자로 interpret 하려 하지 않을 것입니다</p>
-<p>READ가 매크로 문자(macro character)로 시작한다면, 문자는 다음 경우를 판별할 것입니다.</p>
+<p><code>READ</code>시 매크로 문자(macro character)로 시작한다면, 문자는 다음 경우를 판별할 것입니다.</p>
 <div class="table-wrapper"><table><thead><tr><th>문자</th><th>설명</th></tr></thead><tbody>
 <tr><td>&quot;</td><td>문자열을 읽는다.</td></tr>
 <tr><td>’</td><td>폼을 읽는다.</td></tr>
@@ -257,8 +257,8 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 =  \newline #&lt;HASH-TABLE&gt; \space
 ;;=&gt; #&lt;HASH-TABLE&gt;
 </code></pre>
-<p>PRINT는 개행문자(<code>\newline</code>)로 시작하고 띄어쓰기(<code>\space</code>)으로 끝나는 결과물을 출력합니다. 개행과 띄어쓰기 모두 공백(whitespace)으로 취급되므로, (escape가 아닌)리스프 오브젝트가 출력된 표현의 일부가 될수 없기에, 이는 PRINT 결과물이 다른 결과물과는 다르다는 것을 보증합니다.</p>
-<p>PRINT의 다른 변종들은 다양한 쓰임세를 지녔습니다. PRIN1은 PRINT처럼 행동하지만, whitespace로 감싸지 않습니다. 예를들어 연이은 조각들로부터 이름을 만들고자 할때, 이는 유용할 것입니다. PRINC는 PRIN1처럼 행동하지만, 보여는것 보단 READ를 위한 결과물을 생성합니다; 예를들어, PRINC는 문자열을 둘러싸는 쌍따옴표(quotes)를 생략하며, escape character를 출력하지 않습니다.</p>
+<p><code>PRINT</code>는 개행문자(<code>\newline</code>)로 시작하고 띄어쓰기(<code>\space</code>)으로 끝나는 결과물을 출력합니다. 개행과 띄어쓰기 모두 공백(whitespace)으로 취급되므로, (escape가 아닌)리스프 오브젝트가 출력된 표현의 일부가 될수 없기에, 이는 PRINT 결과물이 다른 결과물과는 다르다는 것을 보증합니다.</p>
+<p><code>PRINT</code>의 다른 변종들은 다양한 쓰임세를 지녔습니다. <code>PRIN1</code>은 <code>PRINT</code>처럼 행동하지만, whitespace로 감싸지 않습니다. 예를들어 연이은 조각들로부터 이름을 만들고자 할때, 이는 유용할 것입니다. PRINC는 PRIN1처럼 행동하지만, 보여는것 보단 READ를 위한 결과물을 생성합니다; 예를들어, PRINC는 문자열을 둘러싸는 쌍따옴표(quotes)를 생략하며, escape character를 출력하지 않습니다.</p>
 <pre><code class="language-lisp">(print ’a\ bc)
 ;;&gt;&gt;  \newline  |A BC| \space
 ;;=&gt; |A BC|
@@ -271,9 +271,9 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 ;;&gt;&gt; \newline  A BC \space
 ;;=&gt; |A BC|
 </code></pre>
-<h2 id="open-and-close-let-you-work-with-files"><a class="header" href="#open-and-close-let-you-work-with-files">OPEN and CLOSE let you work with files</a></h2>
-<p>보통, READ는 키보드를 읽고 PRINT는 화면에 출력합니다. 이러한 함수 모두 optional 인자를 취합니다; 인자는 READ를 위한 input stream과 PRINT를 위한 output stream을 지정합니다. stream은 무엇일까요? stream은 데이터의 근원(source)나 밑바닥(sink)이며, 보통 (그치만 절대적이지는 않은) 문자(characters)입니다. 이제부터, 저희는 tex file이 어떻게 문자 stream의 source나 sink가 될 수 있는지를 살펴볼 것입니다. 19장 [p 183]에서 저희는 몇몇 다른 가능성들을 살펴볼 것입니다.</p>
-<p>여러분은, 파일 이름을 인자로 취하고 stream의 방향(input이나 output)을 결정하는 keyword 인자를 취하는, OPEN 함수를 이용하여 stream을 파일로 붙일 수 있습니다. stream에 관한 작업을 종료하고 관련된 file을 닫기 위해선, CLOSE 함수를 사용합니다.</p>
+<h2 id="open과-close는-파일을-다룰-수-있게-한다"><a class="header" href="#open과-close는-파일을-다룰-수-있게-한다">OPEN과 CLOSE는 파일을 다룰 수 있게 한다.</a></h2>
+<p>보통, <code>READ</code>는 키보드를 읽고 <code>PRINT</code>는 화면에 출력합니다. 이러한 함수 모두 옵셔널(optional) 인자를 취합니다; 인자는 <code>READ</code>를 위한 입력 스트림과 <code>PRINT</code>를 위한 출력 스트림을 지정합니다. 스트림(stream)은 무엇일까요? 스트림은 데이터의 근원(source)이자 밑바닥(sink)이며, 보통 (그치만 절대적이지는 않은) 문자(characters)입니다. 이제부터, 저희는 tex file이 어떻게 문자 stream의 source나 sink가 될 수 있는지를 살펴볼 것입니다. 19장 [p 183]에서 저희는 몇몇 다른 가능성들을 살펴볼 것입니다.</p>
+<p>여러분은, 파일 이름을 인자로 취하고 스트림의 방향(입력과 출력)을 결정하는 키워드 인자를 취하는, <code>OPEN</code> 함수를 이용하여 스트림을 파일로 붙일 수 있습니다. 스트림에 관한 작업을 종료하고 관련된 파일을 닫기 위해선, <code>CLOSE</code> 함수를 사용합니다.</p>
 <pre><code class="language-lisp">(setq out-stream (open &quot;my-temp-file&quot; :direction :output))
 ;;=&gt; #&lt;OUTPUT-STREAM &quot;my-temp-file&quot;&gt;
 
@@ -292,10 +292,10 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 (close in-stream)
 ;;=&gt; T
 </code></pre>
-<p>이 예제에서, 저희는 my-temp-file에 대한 output stream을 만들고, symbol ABC를 그 stream에 출력하였습니다. 인자는 평상시처럼 반환하지만 출력을 하지 않는 다는 것을 주목하시기 바랍니다 - 대신, 출력된 결과는 파일로 갑니다.</p>
-<p>다음으로, output stream을 닫고 동일한 파일에 input stream을 열었습니다. 그런 다음 저희가 file에 출력한 심볼을 읽어온 다음, input stream을 닫음으로써 끝을 맺습니다.</p>
+<p>이 예제에서, 저희는 <code>my-temp-file</code>에 대한 출력 스트림을 만들고, 심볼 <code>ABC</code>를 그 스트림에 출력하였습니다. 인자는 평상시처럼 반환하지만 출력을 하지 않는 다는 것을 주목하시기 바랍니다 - 대신, 출력된 결과는 파일로 갑니다.</p>
+<p>다음으로, 출력 스트림을 닫고 동일한 파일에 입력 스트림을 열었습니다. 그런 다음 저희가 파일에 출력한 심볼을 읽어온 다음, 입력 스트림을 닫음으로써 끝을 맺습니다.</p>
 <h2 id="variations-on-a-print-theme"><a class="header" href="#variations-on-a-print-theme">Variations on a PRINT theme</a></h2>
-<p>리스프는 또한, 이러한 옵션을 제어하는 keyword 인자를 이용하여, 여러분에게 출력에 대해 더욱 세부적인 것에 관한 제어권을 주는 WRITE 함수를 제공합니다:</p>
+<p>리스프는 또한, 이러한 옵션을 제어하는 키워드 인자를 이용하여, 여러분에게 출력에 대해 더욱 세부적인 것에 관한 제어권을 주는 <code>WRITE</code> 함수를 제공합니다:</p>
 <div class="table-wrapper"><table><thead><tr><th>Keyword Argument</th><th>Default Value</th><th>Action</th></tr></thead><tbody>
 <tr><td>:stream</td><td><code>t</code></td><td>set output stream</td></tr>
 <tr><td>:escape</td><td><code>*print-escape*</code></td><td>include escape characters</td></tr>
@@ -315,7 +315,7 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 <tr><td>:pprint-dispatch</td><td><code>*print-pprint-dispatch*</code></td><td>&quot;</td></tr>
 </tbody></table>
 </div>
-<p>우연하게도, 위에 키워드 인자의 기본값으로 나온 변수들은 또한 PRINT의 연산을 제어합니다. 여러분은, PRIN1을 감싸는 LET 폼에서 이러한 변수들을 binding 함으로써, non-default keyword 인자로 WRITE의 효과를 얻을 수 있습니다:</p>
+<p>우연하게도, 위에 키워드 인자의 기본값으로 나온 변수들은 또한 <code>PRINT</code>의 연산을 제어합니다. 여러분은, <code>PRIN1</code>을 감싸는 <code>LET</code> 폼에서 이러한 변수들을 바인딩 함으로써, non-default 키워드 인자로 <code>WRITE</code>의 효과를 얻을 수 있습니다:</p>
 <pre><code class="language-lisp">(write foo
        :pretty t
        :right-margin 60
@@ -327,7 +327,7 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
       (*print-case* :downcase))
   (prin1 foo))
 </code></pre>
-<p>PRINT가 추가하는 앞에 newline이 있고 뒤에 빈칸(blank)이 오는걸 원치 않기에, <code>print</code>가 아닌 <code>prin1</code>를 사용하였습니다.</p>
+<p><code>PRINT</code>가 추가하는 앞에 newline이 있고 뒤에 빈칸(blank)이 오는걸 원치 않기에, <code>print</code>가 아닌 <code>prin1</code>를 사용하였습니다.</p>
 <p>여러분의 프로그램이 <code>*PRINT-...*</code> 변수를 바꾸지만, 프로그램의 어느 지점에서 기본 값(default value)을 쓰고자 한다면, <code>with-standard-io-syntax</code> 폼으로 프로그램의 일부를 감쌀 수 있습니다:</p>
 <pre><code class="language-lisp">;;프로그램의 printer control을 정의한다.
 (setq *print-circle* t)

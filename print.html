@@ -913,16 +913,15 @@ first
 (my-calculation 3 2 7 5)
 ;;=&gt; 92
 </code></pre>
-<p>:TODO(pyoung)
-함수를 호출할때 인수들은, 순서에 맞게 인자 이름에 바인딩 됩니다. 리스프는 인자 이름의 list에 대한 몇몇 선택적인 변형variations을 지닙니다. 공식적으로 이러한 리스트를 lambda 리스트라 부릅니다 - 21장[p 198]에서 이것의 다른 기능들에 대해 살펴 볼 것입니다.</p>
+<p>함수를 호출할때 인수들은, 순서에 맞게 인자 이름에 바인딩 됩니다. 리스프는 인자 이름의 리스트는 여러가지 변형들이 있습니다. 공식적으로 이러한 변형 리스트를 람다 리스트라 부릅니다 - 21장[p 198]에서 이것의 다른 기능들에 대해 살펴 볼 것입니다.</p>
 <h2 id="lambda---이름-없는-함수-정의"><a class="header" href="#lambda---이름-없는-함수-정의">LAMBDA - 이름 없는 함수 정의</a></h2>
-<p>때로는 프로그램에서 단 한곳에서만 쓰이는 함수가 필요할 것입니다. <code>defun</code>으로 함수를 만들어 이를 한번 호출할 수 있습니다. 때때로, 함수에 나중에 프로그램을 읽을때 도움을 주는 descriptive 이름을 줄 수 있으므로, 이는 할 수 있는 최선이 됩니다. 그러나 종종 여러분이 필요한 함수는 아주 사소하거나 아주 명백하여, 이름을 짓고싶지 않거나 이전에 이름이 쓰였는제 대해 걱정하지 않고자 할 것입니다. 이와 같은 상황에서, 리스프는 <code>lambda</code> 폼을 이용하여 이름이 붙여지지 않는 함수를 만들 수 있게 합니다. <code>lambda</code> 폼은 마치 이름이 없는 <code>defun</code> 폼처럼 보입니다:</p>
+<p>때로는 프로그램에서 단 한곳에서만 쓰이는 함수가 필요할 것입니다. <code>defun</code>으로 함수를 만들어 이를 한번만 호출할 수 있습니다. 그리고 때때로, 나중에 프로그램을 읽을때 도움을 주는 잘 짜여진 이름을 함수에 부여할 수 있습니다. 그러나 종종 여러분이 필요한 함수는 아주 사소하거나 아주 명백하여 이름을 굳이 지을 필요가 없거나, 이전에 이름이 쓰였는지에 대해 걱정하지 않고 싶을 때가 있을 것입니다. 이와 같은 상황에서, 리스프에선 <code>lambda</code> 폼을 이용하여 이름 없는 함수를 만들 수 있습니다. <code>lambda</code> 폼은 마치 이름이 없는 <code>defun</code> 폼처럼 보입니다:</p>
 <pre><code class="language-lisp">(lambda (a b c x)
    (+ (* a (* x x))
       (* b x)
       c))
 </code></pre>
-<p><code>lambda</code> 폼을 평가할 수 없습니다; 이는 리스프가 함수를 찾을 수 있다고 예상하는 곳에서 보여야 합니다 - 보통 form의 첫번째 오소로;</p>
+<p>여기서 <code>lambda</code> 폼을 평가할 수 없습니다; 이는 리스프가 함수 자리라고 예상되어 지는 곳에서만 보여야 합니다 - 보통 폼의 첫번째 요소로;</p>
 <pre><code class="language-lisp">(lambda (a b c x)
      (+ (* a (* x x))
         (* b x)
@@ -951,7 +950,8 @@ first
    body)
 </code></pre>
 <h2 id="매크로는-값이-아닌-폼을-반환한다"><a class="header" href="#매크로는-값이-아닌-폼을-반환한다">매크로는 값이 아닌 폼을 반환한다</a></h2>
-<p>매크로 본체는 평가될 폼을 반환합니다. 다른말로 하자면, 값이 아닌 폼을 반환하는 매크로의 본체를 작성해야 합니다. 리스프가 매크로의 호출을 평가할때, 이는 우선 매크로 본체 정의를 평가하고, 첫번째 평가의 결과를 평가합니다 (비교하여, 함수의 본체는 값을 반환하도록 평가됩니다) 여기 여러분이 가장 알고자 하는 것을 설명해주는 간단한 매크로 쌍이 있습니다:</p>
+<p>:TODO(pyoung)
+매크로 본체는 평가될 폼을 반환합니다. 다른말로 하자면, 매크로의 본체로 값이 아닌 폼을 반환하도록 작성해야 합니다. 리스프가 매크로의 호출을 평가할때, 이는 우선 매크로 본체 정의를 평가하고, 첫번째 평가의 결과를 평가합니다 (비교하여, 함수의 본체는 값을 반환하도록 평가됩니다) 여기 여러분이 가장 알고자 하는 것을 설명해주는 간단한 매크로 쌍이 있습니다:</p>
 <pre><code class="language-lisp">(defmacro setq-literal (place literal)
   `(setq ,place ',literal))
 ;;=&gt; SETQ-LITERAL
@@ -969,35 +969,35 @@ a
 (reverse-cons nil A)
 ;;=&gt; (B)
 </code></pre>
-<p>SETQ-LITERAL는 인자가 평가되지 않는다는 점을 제외하면 마치 <code>setq</code>처럼 동작합니다(SETQ가 이의 두번째 인자를 평가한다는 것을 명심하시기 바랍니다). SETQ-LITERAL의 본체는 (&quot;역따옴표&quot;라 말하는) `로 시작하는 폼을 지녔습니다. 역따옴표는 역따옴표된 폼에서 쉼표가 보인다는 점을 제외하면 (폼으로 둘러싸인 모든 것의 평가를 숨기는)따옴표처럼 행동합니다.</p>
+<p><code>setq-literal</code>는 인수가 평가되지 않는다는 점을 제외하면 마치 <code>setq</code>처럼 동작합니다(SETQ는 이의 두번째 인수를 평가한다는 것을 명심하시기 바랍니다). <code>SETQ-LITERAL</code>의 본체는 (&quot;역따옴표&quot;라 말하는) `로 시작하는 폼을 지녔습니다. 역따옴표는 역따옴표된 폼에서 쉼표가 보인다는 점을 제외하면 (폼으로 둘러싸인 모든 것의 평가를 숨기는)따옴표처럼 행동합니다.</p>
 <p>따라서 위의 <code>(SETQ-LITERAL A B)</code>를 호출함에 있어, 무슨 일이 벌어지는지가 여기 나와 있습니다:</p>
 <ol>
-<li>PLACE를 symbol A에 bind한다.</li>
-<li>LITERAL를 symbol B에 bind한다.</li>
+<li>PLACE를 심볼 A에 bind한다.</li>
+<li>LITERAL를 심볼 B에 bind한다.</li>
 <li>다음 단계를 거처 `(SETQ ,PLACE ',LITERAL) 본체를 평가한다:
 <ol>
-<li>symbol A얻기 위해 PLACE를 평가한다.</li>
-<li>symbol B얻기 위해 LITERAL를 평가한다.</li>
-<li>form (SETQ A 'B)를 반환한다.</li>
+<li>심볼 A얻기 위해 PLACE를 평가한다.</li>
+<li>심볼 B얻기 위해 LITERAL를 평가한다.</li>
+<li>폼 (SETQ A 'B)를 반환한다.</li>
 </ol>
 </li>
-<li>form (SETQ A 'B)를 평가한다.</li>
+<li>폼 (SETQ A 'B)를 평가한다.</li>
 </ol>
-<p>반환된 폼에서 역따옴표나 쉼표는 보이지 않습니다. SETQ-LITERAL 호출에서 A나 B가 평가되지 않지만 서로 다른 이유 때문입니다. A는 SETQ의 첫번째 인자처럼 보이기에 평가되지 않습니다. B는 macro에 의해 반환된 form앞에 따옴표가 보이기에 평가되지 않습니다</p>
+<p>반환된 폼에서 역따옴표나 쉼표는 보이지 않습니다. <code>SETQ-LITERAL</code> 호출에서 <code>A</code>나 <code>B</code>가 평가되지 않지만 서로 다른 이유 때문입니다. <code>A</code>는 <code>SETQ</code>의 첫번째 인자처럼 보이기에 평가되지 않습니다. <code>B</code>는 매크로에 의해 반환된 폼앞에 따옴표가 보이기에 평가되지 않습니다</p>
 <p><code>(REVERSE-CONS NIL A)</code>의 동작은 유사합니다:</p>
 <ol>
-<li>bind REST를 symbol NIL에 bind한다.</li>
-<li>bind FIRST를 symbol A에 bind한다.</li>
+<li>bind REST를 심볼 NIL에 bind한다.</li>
+<li>bind FIRST를 심볼 A에 bind한다.</li>
 <li>다음 단계를 거처, `(CONS ,FIRST ,REST) 본체를 평가한다:
 <ol>
-<li>symbol A를 얻기 위해 FIRST를 평가한다.</li>
-<li>symbol NIL를 얻기 위해 REST를 평가한다.</li>
-<li>form (CONS A NIL)를 반환한다.</li>
+<li>심볼 A를 얻기 위해 FIRST를 평가한다.</li>
+<li>심볼 NIL를 얻기 위해 REST를 평가한다.</li>
+<li>폼 (CONS A NIL)를 반환한다.</li>
 </ol>
 </li>
-<li>form (CONS A NIL)을 평가한다.</li>
+<li>폼 (CONS A NIL)을 평가한다.</li>
 </ol>
-<p>CONS가 이의 인자를 평가하며, 매크로 본체는 두 인자에 따옴표를 붙이지 않았기에, <code>reverse-cons</code>의 두 인자는 평가됩니다. A는 symbol B로 평가되며, NIL은 자기자신으로 평가됩니다.</p>
+<p>CONS가 이의 인자를 평가하며, 매크로 본체는 두 인자에 따옴표를 붙이지 않았기에, <code>reverse-cons</code>의 두 인자는 평가됩니다. <code>A</code>는 심볼 <code>B</code>로 평가되며, <code>NIL</code>은 자기자신으로 평가됩니다.</p>
 <p>여러분이 평가되기전에 매크로 본체가 어떻게 보여지는지 확인하고자 한다면, <code>macroexpand</code> 함수를 이용할 수 있습니다:</p>
 <pre><code class="language-lisp">(macroexpand '(setq-literal a b))
 ;;=&gt; (SETQ A 'B)
@@ -1031,14 +1031,13 @@ a
 ;;=&gt; :THIS
 ;;=&gt; :THAT
 </code></pre>
-<p>폼의 평가에 의해 생성된 여러 라인이으로, 얼마나 많은 값이 반환되었는지 보았습니다. 위의 예제에서 3개의 <code>values</code> 폼에서 각각 0개, 1개, 2개의 값을 생성하였습니다.</p>
+<p>폼의 평가에 의해 생성된 여러 라인이으로 얼마나 많은 값이 반환되었는지 보았습니다. 위의 예제에서 3개의 <code>values</code> 폼에서 각각 0개, 1개, 2개의 값을 생성하였습니다.</p>
 <p><code>values</code>는 함수이며, 따라서 인자를 평가합니다.</p>
 <h2 id="몇몇-특수한-폼은-여러개의-값을-받을-수-있다"><a class="header" href="#몇몇-특수한-폼은-여러개의-값을-받을-수-있다">몇몇 특수한 폼은 여러개의 값을 받을 수 있다.</a></h2>
-<p>:TODO(pyoung)
-하나의 프로그램에서 다수의 값으로 무얼 하길 원하십니까? 가장 기본적인 동작은 :</p>
+<p>여러개의 값들을 다룰려면 무엇을 해야할까요? 가장 기본적인 동작으로는 :</p>
 <ol>
-<li>각 값들을 개별 심볼로 바인드한다, 혹은</li>
-<li>값들을 리스트로 모은다.</li>
+<li>각 값들을 개별 심볼로 바인드한다</li>
+<li>혹은 값들을 리스트로 모은다.</li>
 </ol>
 <p>각 값들을 개별 심볼로 바인드하기 위해 <code>multiple-value-bind</code>를 이용합니다:</p>
 <pre><code class="language-lisp">(multiple-value-bind (a b c) (values 2 3 5)
@@ -1080,8 +1079,8 @@ a
 ;;=&gt; 7
 ;;=&gt; 8
 </code></pre>
-<p>함수와 <code>lambda</code> 본체의 경우엔, &quot;암묵적인 PROGN&quot;라는 것으로 부터 다수의 값이 반환되었습니다. 이는, 본체가 다수의 폼을 포함할 수 있으며, 오직 마지막 form의 값이 반환될거라고, 멋지게 말하는 방법입니다.</p>
-<p>여러분은 이러한 행동을 원할때 <code>progn</code> 스페실 폼을 이용할 수 있습니다. <code>(PROGN form1 form2 ... formN)</code> 은 순서대로 <code>form1</code>부터 <code>formN</code>까지 평가하고, 최종적으로 <code>formN</code>의 값을 반환합니다.</p>
+<p>함수와 <code>lambda</code> 본체의 경우엔, &quot;암시적 <code>PROGN</code>&quot;라 불리는 무언것으로부터 다수의 값이 반환되었습니다. 이는, 본체가 다수의 폼을 포함할 수 있으며, 최종적으로 마지막 폼의 값이 반환됩니다.</p>
+<p>위와같은 행동을 원할때 <code>progn</code> 스페실 폼을 이용할 수 있습니다. <code>(PROGN form1 form2 ... formN)</code> 은 순서대로 <code>form1</code>부터 <code>formN</code>까지 평가하고, 최종적으로 <code>formN</code>의 값을 반환합니다.</p>
 <h2 id="짚고-넘어가기-9"><a class="header" href="#짚고-넘어가기-9">짚고 넘어가기</a></h2>
 <ul>
 <li><code>values</code></li>
@@ -1092,29 +1091,28 @@ a
 <ul>
 <li><a href="https://dept-info.labri.fr/~strandh/Teaching/MTP/Common/David-Lamkins/chapter03-10.html">원문</a></li>
 </ul>
-<h2 id="lisp-almost-always-does-the-right-thing-with-numbers"><a class="header" href="#lisp-almost-always-does-the-right-thing-with-numbers">Lisp almost always does the right thing with numbers</a></h2>
+<h2 id="리스프는-거의-항상-숫자를-제대로-처리한다"><a class="header" href="#리스프는-거의-항상-숫자를-제대로-처리한다">리스프는 거의 항상 숫자를 제대로 처리한다.</a></h2>
 <p>이는 말하기에 이상한 것처럼 들립니다. 컴퓨터는 항상 숫자로 일을 수행하지 않나요?  음, 아니요... 보통은 그렇지 않습니다.</p>
-<p>수치 계산은 수많은 방식으로 나뉠 수 있습니다. 가장 큰 문제가 되는 점 중 하나는 소수의 계산이 있습니다 (여러분의 언어가 이를 실수라 부른다면, 그것은 거짓말 입니다). visual-어쩌고 혹은 객체-지향의-무언가에 대한 많은 책들중 거의 절반정도가 소수의 계산의 적절한 사용에 대해 쓰여졌습니다.</p>
-<p>소수의 문제는 수학적으로 실수가 아니지만, 종종 그것인양 (잘못)사용됩니다.
-중요한 문제는 그러한 소수가 정확도의 한계를 지녔다는 것입니다 - only so many digits to the right of the decimal point. 이제, 계산의 모든 숫자가 거의 같은 규모라면, 계산은 정확도를 잃지 않을 것입니다. 그러나, 숫자가 매우 다양한 규모라면, 소수 계산은 정확도를 희생합니다.</p>
-<p>여러분의 컴퓨터의 소수가 정확하게 소숫점 7자리를 표현할수 있다고 가정해 봅시다. 그러면, 여러분은 1897482.0에 2973225.0를 더하여 완벽히 정확한 답을 얻을 수 있을 것입니다. 그러나, 1897482.0에 0.2973225를 더하고자 한다면, 정확한 답은 14자리의 숫자이지만, 여러분의 컴퓨터는 1897482.0을 답으로 할 것입니다.</p>
-<p>소수에 간한 또다른 문제는 더욱 미묘subtle합니다. 프로그램을 작성할때, 10진수에 기반하여 수를 쓸 것입니다. 그러나 컴퓨터는 모든 연산을 2진수에 기반하여 수행합니다. 10진수에서 2진수로의 변환은 &quot;명백히 정확한&quot; 특정 숫자에 대해 재미난 일을 수행합니다. 예를들어, 소수 0.1은 2진수로 변환하면 순환 분수입니다. 컴퓨터는 순환분수에 의해 요구되는 무한한 숫자를 저장하지 못하기에, 정확하게 0.1을 저장할 수 없습니다.</p>
+<p>수치 계산은 수많은 방식으로 나뉠 수 있습니다. 가장 큰 문제가 되는 점 중 하나는 소수의 계산이 있습니다 (여러분의 언어가 이를 실수라 부른다면, 그것은 거짓말 입니다). 비쥬얼 어쩌고 혹은 객체 지향 블라블라와 같은 많은 책들 중 대다수가 소수의 계산에 대해 써져있습니다.</p>
+<p>소수의 문제는 수학적으로 실수가 아니지만, 종종 실수인양 (잘못) 사용된다는 점입니다.
+중요한 문제는 소수를 그렇게 사용한다면, 정확도의 한계를 지니게 된다는 것 입니다 - 소수점 우측 몇개의 자릿수 만큼. 이제, 계산에 사용되는 모든 숫자가 거의 같은 규모라면, 계산의 정확도가 떨어지지 않을 수 도 있을 것입니다. 그러나, 매우 다양한 규모의 숫자들이라면, 소수점 계산은 정확도를 희생할 것입니다.</p>
+<p>여러분의 컴퓨터의 소수가 정확하게 소숫점 7자리를 표현할수 있다고 가정해 봅시다. 그러면, 여러분은 <code>1897482.0</code>에 <code>2973225.0</code>를 더하면 완벽히 정확한 답을 얻을 수 있을 것입니다. 그러나, <code>1897482.0</code>에 <code>0.2973225</code>를 더하고자 한다면, 정확한 답은 <code>14</code>자리의 숫자이지만, 여러분의 컴퓨터는 <code>1897482.0</code>을 답으로 할 것입니다.</p>
+<p>소수에 관한 또 다른 문제는 더욱 미묘합니다. 프로그램을 작성할때 보통 10진수에 기반하여 수를 사용할 것입니다. 그러나 컴퓨터는 모든 연산을 2진수에 기반하여 수행합니다. 10진수에서 2진수로의 변환은 어떤 &quot;명백히 정확한&quot; 특정 숫자에 대해 재미난 일을 수행합니다. 예를들어, 소수 <code>0.1</code>은 2진수로 변환하면 순환 분수입니다. 컴퓨터는 순환분수에 의해 요구되는 무한한 숫자를 저장하지 못하기에, 정확하게 0.1을 저장할 수 없습니다.</p>
 <p>대부분의 컴퓨터 언어에서 정수(자연수) 연산은 또다른 문제를 지닙니다</p>
 <ul>
-<li>하나의 정수를 담을 수 있는 양수나 음수의 최대치에 재한을 가하는 경향이 있습니다. 따라서, 숫자 하나를 여러분의 언어에 대해 컴퓨터를 다룰 수 있는 가장 큰 정수에 더하고자 한다면, 둘 중 하나가 발생합니다:</li>
+<li>하나의 정수를 담을 수 있는 양수나 음수의 최대치에 제한을 가하는 경향이 있습니다. 따라서, 숫자 하나를 여러분의 언어에 대해 컴퓨터를 다룰 수 있는 가장 큰 정수에 더하고자 한다면, 둘 중 하나가 일어납니다:</li>
 </ul>
 <ol>
 <li>에러로 프로그램이 종료된다, 혹은</li>
-<li>굉장히 부정확한 답을 얻는다.(가장 큰 양수에 1을 더한 것은 가장 큰 음수중에 적어도 하나를 만들어 냅니다.)</li>
+<li>굉장히 부정확한 답을 얻는다.(가장 큰 양수에 1을 더한 것은 가장 작은 음수를 만들어 냅니다.)</li>
 </ol>
-<p>그러면 숫자에 관해 올바른 일을 수행하기 위해 리스프는 어떻게 처리할까요? 무엇보다도, 이 문제가 컴퓨터 연산에서 나온 것처럼 보입니다. 답은 리스프는 내장 컴퓨터 산술 연산을 바로 사용하지 않는다는 것입니다 - 수학적으로 정확한 특정한 수치 데이터 형식을 추가하였습니다:</p>
+<p>그러면 숫자에 관해 올바른 일을 수행하기 위해 리스프는 어떻게 처리할까요? 무엇보다도, 이 문제가 컴퓨터의 연산에서 나온 것처럼 보입니다. 답은 리스프는 내장 컴퓨터 산술 연산을 바로 사용하지 않는다는 것입니다 - 수학적으로 정확한 특정한 수치 데이터 형식을 추가하였습니다:</p>
 <ul>
-<li>bignums은 무한한 정수이다 (컴퓨터의 메모리의 한계에 달려있다)</li>
-<li>유리수는, 대략적인 머신 나눗셈 알고리즘에서 나온 결과인 소수가 아니라,</li>
+<li><code>bignum</code>은 무한한 정수이다 (컴퓨터의 메모리의 한계에 달려있다)</li>
+<li>유리수는 나눗셈 알고리즘에서 나온 대략적인 소수가 아니라 두 정수의 정확한 몫이다.</li>
 </ul>
-<p>두 정수의 정확한 몫이다.</p>
-<p>물론, 리스프 또한 machine-기반 정수와 소수를 지닙니다. Machine integers를 리스프에서 fixnums라 부릅니다. fixnum의 범위에서 자연수가 떨어지면, 리스프는 이를 machine integer로 저장할 것입니다. 그러나, 이게 매우 커지면, 리스프는 자동으로 이를 bignum으로 승격promote시킵니다.</p>
-<p>제가 리스프는 거의 항상 수에 관해 올바른 일을 수행한다고 했을때, 저는 이것이 거의 항상 수학적으로 옳은 수의 표현을 고른다는 것을 의미한다는 뜻으로 말했었습니다:</p>
+<p>물론, 리스프 또한 머신 기반 정수와 소수를 지닙니다. 머신에서의 정수를 리스프에서 <code>fixnum</code>라 부릅니다. <code>fixnum</code>의 범위에서 자연수가 떨어지면, 리스프는 이를 머신의 정수로 저장할 것입니다. 그러나, 이게 매우 커지면, 리스프는 자동으로 이를 <code>bignum</code>으로 승격시킬 것입니다.</p>
+<p>앞서 리스프는 거의 항상 수에 관해 올바른 일을 수행한다고 말했는데, <code>거의 항상 수학적으로 옳은 수의 표현을 고른다</code> 라는 의미로 말했었습니다:</p>
 <pre><code class="language-lisp">(/ 1 3)
 ;;=&gt; 1/3
 
@@ -1128,10 +1126,11 @@ a
 
 (factorial 100)
 ;;=&gt; 933262154439441526816992388562667004907159682643816214685
-     929638952175999932299156089414639761565182862536979208272
-     23758251185210916864000000000000000000000000
+;;   929638952175999932299156089414639761565182862536979208272
+;;   23758251185210916864000000000000000000000000
 </code></pre>
-<p>소수를 이용한 계산을 작성할 수 있지만, 리스프는 정확한 수치 결과를 부정확한 소수로 전환할수 없기에(여러분은 이에게 소수는 전염된다라고 말해야 합니다) 일단 이를 계산에 도입하면, 전체 계산 결과는 소수를 유지할 것입니다:</p>
+<p>:TODO(pyoung)
+소수를 사용하여 계산을 할 수 도 있지만, 리스프는 정확한 수치 결과를 부정확한 소수로 전환할 수 없기에(여러분은 이에게 소수는 전염된다라고 말해야 합니다) 일단 이를 계산에 도입하면, 전체 계산 결과는 소수를 유지할 것입니다:</p>
 <pre><code class="language-lisp">
 (float (/ 1 3))
 ;;=&gt; 0.3333333333333333
@@ -1159,9 +1158,9 @@ a
 (+ 1/3 2/3)
 ;;=&gt; 1 ; 이전 계산과 비교하세요
 </code></pre>
-<p>리스프는 소수를 소수점과 같이, 정수에는 없이 출력합니다.</p>
-<h2 id="characters-give-lisp-something-to-read-and-write"><a class="header" href="#characters-give-lisp-something-to-read-and-write">Characters give Lisp something to read and write</a></h2>
-<p>기본적으로 리스프 I/O는 문자를 이용합니다. READ와 WRITE 함수는 문자를 리스프 오브젝트로 그리고 역으로 변환시킵니다. READ-CHAR와 WRITE_CHAR는 단일 문자를 읽고 씁니다.</p>
+<p>리스프는 소수를 소수점과 같이, 정수에는 소수점 없이 출력합니다.</p>
+<h2 id="문자는-리스프가-읽고-쓸-수-있는-무언가를-제공합니다"><a class="header" href="#문자는-리스프가-읽고-쓸-수-있는-무언가를-제공합니다">문자는 리스프가 읽고 쓸 수 있는 무언가를 제공합니다.</a></h2>
+<p>기본적으로 리스프 I/O는 문자를 이용합니다. <code>READ</code>와 <code>WRITE</code> 함수는 문자를 리스프 오브젝트로 그리고 역으로 변환시킵니다. <code>READ-CHAR</code>와 <code>WRITE-CHAR</code>는 단일 문자를 읽고 씁니다.</p>
 <pre><code class="language-lisp">(read)
 ;;&lt;&lt; a \newline
 ;;=&gt; A
@@ -1187,15 +1186,15 @@ a
 ;;=&gt; #\a
 
 (write-char 'a)
-| Error: Not a character
+;;&gt;| Error: Not a character
 </code></pre>
-<p>위 예에서 새로운 표기를 추가했습니다. <code>;;&lt;&lt;</code> 표시는 리스프는 READ와 같은 입력함수에 대한 입력을 기다린다는 것을 의미합니다. <code>\newline</code>은 엔터(enter)키에 의해 생성되는 개행문자를 나타냅니다.</p>
-<p><code>;;&gt;&gt;</code>는 값을 반환하는 것(<code>;;=&gt;</code>)이 아니라 출력을 나타냅니다.</p>
-<p>개행시 <code>read</code>의 입력받는 동작이 종료된다는 것을 알아채셨을 것입니다. READ는 완벽한 리스프 표현식을 구성하고자하는 문자들을 모으기 때문입니다. 레슨 11[p 77]에서 이것에 대해 좀 더 살펴볼 것입니다. 이번 예제에서, READ는 새로운라인newline으로 종료되는 심볼을 모읍니다. 심볼은 또한 공백, 괄호, 심볼의 일부가 아닌 문자로 종료됩니다.</p>
-<p>대조적으로, READ-CHAR는 input에서 정확히 하나의 문자만 읽습니다. 문자를 받자마자, READ-CHAR는 실행을 완료하고 문자를 반환합니다.</p>
-<p>몇몇 리스프 시스템은 어떠한 입력을 받아들이기 전에 return 키를 누르도록 요구할 것입니다. 이는 일상적인게 아니며, 환경설정 인자로 수정할 수 있습니다 - 여러분의 리스프 vender와 상담을 하시기 바랍니다.</p>
-<p>WRITE와 WRITE-CHAR는 둘다 받았던 값을 반환합니다. 값을 출력하는 방식은 다릅니다. WRITE는 값을 출력하므로, 동일한 값을 생성하는 READ로 표현할 수 있습니다. WRITE-CHAR는, 이것이 READ에서의 문자라는 것을 나타내는 추가 리스프 syntax (#)가 없는, 읽을 수 있는 문자를 출력합니다.</p>
-<p>리스프는 단일 문자를 #\문자 표기법을 이용하여 나타내며, 그러한 문자로는 literal 문자나 출력가능한 상형문자가 아닌 문자의 이름이 있습니다.</p>
+<p>위 예에서 새로운 표기를 추가했습니다. <code>;;&lt;&lt;</code> 표시는 <code>READ</code>와 같은 입력함수에 대한 입력을 기다린다는 것을 의미합니다. <code>\newline</code>은 엔터(enter)키에 의해 생성되는 개행문자를 나타냅니다.</p>
+<p>값을 반환하는 것(<code>;;=&gt;</code>)과 달리 <code>;;&gt;&gt;</code>는 출력을 나타냅니다.</p>
+<p>개행시 <code>read</code>의 입력받는 동작이 종료된다는 것을 알아채셨을 것입니다. <code>READ</code>는 완벽한 리스프 표현식을 구성하고자하는 문자들을 모으기 때문입니다. 레슨 11[p 77]에서 이것에 대해 좀 더 살펴볼 것입니다. 이번 예제에서, <code>READ</code>는 개행으로 종료되는 심볼을 모읍니다. 심볼은 또한 공백, 괄호, 심볼의 일부가 아닌 문자로 종료됩니다.</p>
+<p>대조적으로, <code>READ-CHAR</code>는 입력에서 정확히 하나의 문자만 읽습니다. 문자를 받자마자 <code>READ-CHAR</code>는 실행을 완료하고 문자를 반환합니다.</p>
+<p>몇몇 리스프 시스템은 어떠한 입력을 받아들이기 전에 리턴(return) 키를 누르도록 요구할 것입니다. 이는 일상적인게 아니며, 환경 설정 변수로 변경 할 수 있습니다 - 여러분이 사용하는 리스프의 제조사와 상담을 하시기 바랍니다.</p>
+<p><code>WRITE</code>와 <code>WRITE-CHAR</code>는 둘 다 받은 값을 반환합니다. 값을 출력하는 방식은 다릅니다. <code>WRITE</code>는 값을 출력하므로, 동일한 값을 생성하는 <code>READ</code>로 표현할 수 있습니다. <code>WRITE-CHAR</code>는, 이것이 <code>READ</code>에서의 문자라는 것을 나타내는 추가 리스프 문법 (<code>#\</code>)가 없는, 읽을 수 있는 문자를 출력합니다.</p>
+<p>리스프는 단일 문자를 <code>#\문자</code> 표기법을 이용하여 나타내며, 그러한 문자로는 literal 문자나 출력 가능한 상형문자가 아닌 문자의 이름이 있습니다.</p>
 <div class="table-wrapper"><table><thead><tr><th>Character</th><th>Hex Value</th><th>Lisp</th><th>Standard?</th></tr></thead><tbody>
 <tr><td>space</td><td>20</td><td>#\Space</td><td>yes</td></tr>
 <tr><td>newline</td><td>--</td><td>#\Newline</td><td>yes</td></tr>
@@ -1207,14 +1206,14 @@ a
 <tr><td>rubout or DEL</td><td>7F</td><td>#\Rubout</td><td>semi</td></tr>
 </tbody></table>
 </div>
-<p><code>#\Space</code>와 <code>#\Newline</code>만이 모든 리스프 시스템에서의 요구사항입니다. ASCII 문자셋를 이용하는 시스템은 아마 위에 나온 나머지 문자코드를 구현할 것입니다. #Newline 문자는 호스트 시스템에 맞는 출력 라인의 끝을 표시하는 convention을 따릅니다. 예로:</p>
+<p><code>#\Space</code>와 <code>#\Newline</code>만이 모든 리스프 시스템에서의 요구사항입니다. ASCII 문자셋를 이용하는 시스템은 아마 위에 나온 나머지 문자코드를 구현할 것입니다. <code>\#Newline</code> 문자는 호스트 시스템에 맞는 출력 라인의 끝을 표시하는 컨벤션(convention)을 따릅니다. 예로:</p>
 <div class="table-wrapper"><table><thead><tr><th>System</th><th>Newline</th><th>Hex Value</th></tr></thead><tbody>
 <tr><td>Macintosh</td><td>CR</td><td>0D</td></tr>
 <tr><td>MS-DOS</td><td>CR LF</td><td>0D 0A</td></tr>
 <tr><td>Unix</td><td>LF</td><td>0A</td></tr>
 </tbody></table>
 </div>
-<p>94개의 출력가능한 표준 문자들이 <code>\#char</code>로 표현됩니다:</p>
+<p>94개의 출력가능한 표준 문자들이 <code>\#문자</code>로 표현됩니다:</p>
 <pre><code class="language-txt">  ! &quot; # $ % &amp; ' ( ) * + , - . /
 0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
 @ A B C D E F G H I J K L M N O
@@ -1223,11 +1222,11 @@ P Q R S T U V W X Y Z [ \ ] ^ _
 p q r s t u v w x y z { | } ~
 </code></pre>
 <h2 id="arrays-organize-data-into-tables"><a class="header" href="#arrays-organize-data-into-tables">Arrays organize data into tables</a></h2>
-<p>여러분이 데이터를 2, 3, 더 많은 규모의 테이블에 역으려한다면, 배열array을 만들 수 있습니다:</p>
+<p>여러분이 데이터를 2차원, 3차원 혹은 더 많은 차원의 테이블로 역으려한다면, 배열(array)을 만들 수 있습니다:</p>
 <pre><code class="language-lisp">(setq a1 (make-array '(3 4)))
 ;;=&gt; #2A((NIL NIL NIL NIL)
-         (NIL NIL NIL NIL)
-         (NIL NIL NIL NIL))
+;;       (NIL NIL NIL NIL)
+;;       (NIL NIL NIL NIL))
 
 (setf (aref a1 0 0) (list 'element 0 0))
 ;;=&gt; (ELEMENT 0 0)
@@ -1240,8 +1239,8 @@ p q r s t u v w x y z { | } ~
 
 a1
 ;;=&gt; #2A(((ELEMENT 0 0) NIL NIL NIL)
-         ((ELEMENT 1 0) NIL NIL NIL)
-         ((ELEMENT 2 0) NIL NIL NIL))
+;;       ((ELEMENT 1 0) NIL NIL NIL)
+;;       ((ELEMENT 2 0) NIL NIL NIL))
 
 (aref a1 0 0)
 ;;=&gt; (ELEMENT 0 0)
@@ -1299,7 +1298,7 @@ v2
 ;;=&gt; #(34 22 30 :RADIO 66 77)
 </code></pre>
 <h2 id="문자열은-문자를-담고있는-백터"><a class="header" href="#문자열은-문자를-담고있는-백터">문자열은 문자를 담고있는 백터</a></h2>
-<p>여러분은 이미 &quot;...&quot; 신택스를 이용하여 문자열(string)을 작성하는 법을 알고 있습니다. 문자열은 벡터이기에, 문자열의 요소에 접근하기 위해 배열과 백터 함수를 적용할 수 있습니다. 또한 <code>make-string</code> 함수를 이용하여 문자열을 만들거나, <code>string</code> 함수를 이용하여 문자나 심볼을 문자열로 바꿀 수 있습니다.</p>
+<p>여러분은 이미 &quot;...&quot;를 이용한 문자열(string) 작성하는 법을 알고 있습니다. 문자열은 벡터이기에, 문자열의 요소에 접근하기 위해 배열과 백터 함수를 적용할 수 있습니다. 또한 <code>make-string</code> 함수를 이용하여 문자열을 만들거나, <code>string</code> 함수를 이용하여 문자나 심볼을 문자열로 바꿀 수 있습니다.</p>
 <pre><code class="language-lisp">(setq s1 &quot;hello, there.&quot;)
 ;;=&gt; &quot;hello, there.&quot;
 
@@ -1319,8 +1318,8 @@ s1
 ;;=&gt; &quot;G&quot;
 </code></pre>
 <h2 id="symbols-are-unique-but-they-have-many-values"><a class="header" href="#symbols-are-unique-but-they-have-many-values">Symbols are unique, but they have many values</a></h2>
-<p>레슨 5에서 심볼은 고유한 독자성identity을 지닌다고 보았지만, 이는 반복성을 지닙니다: 심볼은 같은 철자의 다른 symbol과 동일합니다(이번 레슨 끝부분에서 좀더 배우게될 package designation를 포함하여). 이는 Lisp로 하여금 프로그램이나 데이터를 읽어올 수 있게 만들 수 있다는 것을 의미하며, 같은 철자로 나타낸 모든 심볼은 동일한 심볼입니다. 리스프가 이를 수행하는 매커니즘을 제공하기에, symbolic 정보를 다루는 프로그램을 작성하는 것에 대한 걱정을 하나 덜게되었습니다.</p>
-<p>저희는 또한 레슨 5에서 심볼은 변수와 함수, 그리고 documentation, print name, properties를 위한 값을 가질 수 있다고 배웠습니다. 심볼의 property list는 다수의 키/값 쌍이 symbol과 연결된 아주 작은 데이터베이스와 같습니다. 예를들어, 여러분의 프로그램이 object를 표현하고 다룬다면, object에 관한 정보를 property list에 저장할 수 있습니다:</p>
+<p>레슨 5에서 심볼은 고유한 독자성(identity)을 지닌다고 보았지만, 이는 반복성을 지닙니다: 심볼은 같은 철자의 다른 심볼과 동일합니다(이번 레슨 끝부분에서 좀더 배우게될 패키지 designation를 포함하여). 이는 리스프로 하여금 프로그램이나 데이터를 읽어올 수 있게 만들 수 있다는 것을 의미하며, 같은 철자로 나타낸 모든 심볼은 동일한 심볼입니다. 리스프가 이를 수행하는 매커니즘을 제공하기에, 심볼릭 정보를 다루는 프로그램을 작성하는 것에 대한 걱정을 하나 덜게되었습니다.</p>
+<p>저희는 또한 레슨 5에서 심볼은 변수와 함수, 그리고 문서, 출력 이름, 프로퍼티(properties)를 위한 값을 가질 수 있다고 배웠습니다. 심볼의 프로퍼티 리스트(property list)는 다수의 키/값 쌍이 심볼과 연결된 아주 작은 데이터베이스와 같습니다. 예를들어, 여러분의 프로그램이 오브젝트를 표현하고 다룬다면, 오브젝트에 관한 정보를 프로퍼티 리스트에 저장할 수 있습니다:</p>
 <pre><code class="language-lisp">(setf (get 'object-1 'color) 'red)
 ;;=&gt; RED
 
@@ -1345,12 +1344,17 @@ s1
 object-1
 ;;&gt;| Error: no value
 </code></pre>
-<p>OBJECT-1은 값을 갖지 않는다는 점을 주목하시기 바랍니다 - 모든 유용한 정보는 두 곳에 있습니다: 심볼의 identify와 심볼의 properties.</p>
-<p>이러한 property의 이용은 현대 object programming보다 몇 십년이나 앞서 나왔습니다. 이는 object의 필수적인 3가지 매커니즘중 2가지를 제공합니다: 식별자identify와 캡슐화encapsulation (property 값 역시 함수가 될 수 있다는 것을 명심하시기 바랍니다). 3번째 매커니즘, 상속inheritance은 다른 &quot;object&quot;를 link하여 simulate합니다.</p>
-<p>Property는 현대 리스프 프로그램에서 거의 사용되지 않습니다. 해쉬테이블Hashtables (아래 참조) [p 73] , (다음 section에서 기술된) 구조체structures , CLOS objects(7장 [p 117]과 14장 [p 157] 참조)는 사용하기에 더 편리하며 더욱 효율적인 방식으로 property lists의 모든 기능을 제공합니다. 현대 리스프 개발 시스템은 property에 파일과 심볼을 정의하는 form의 파일 위치, 함수의 인자 리스트의 정의와 같은 (프로그래밍 환경에서 유용한 도구로 이용하기 위한) 특정 정보를 기록하여 프로그램에 주석을 다는 목적으로 주로 사용합니다.</p>
+<p><code>OBJECT-1</code>은 값을 갖지 않는다는 점을 주목하시기 바랍니다 - 모든 유용한 정보는 두 곳에 있습니다: 심볼의 identify와 심볼의 프로퍼티.</p>
+<p>이러한 프로퍼티의 이용은 현대의 오브젝트 프로그래밍보다 몇 십년이나 앞서 나왔습니다. 이는 오브젝트의 필수적인 3가지 매커니즘중 2가지를 제공합니다: 식별자identify와 캡슐화encapsulation (property 값 역시 함수가 될 수 있다는 것을 명심하시기 바랍니다). 3번째 매커니즘, 상속(inheritance)은 다른 &quot;object&quot;를 link하여 simulate합니다.</p>
+<p>프로퍼티는 오늘날의 리스프 프로그램에서 거의 사용되지 않습니다. 해쉬테이블(Hashtables) (아래 참조) [p 73] , (다음 section에서 기술된) 구조체(structures), CLOS 오브젝트(7장 [p 117]과 14장 [p 157] 참조)는 사용하기 더 편리하며 더욱 효율적인 방식으로 프로퍼티 리스트의 모든 기능을 제공합니다. 현대 리스프 개발 시스템은 프로퍼티 파일과 심볼을 정의하는 폼의 파일 위치, 함수의 인자 리스트의 정의와 같은 (프로그래밍 환경에서 유용한 도구로 이용하기 위한) 특정 정보를 기록하여 프로그램에 주석을 다는 목적으로 주로 사용합니다.</p>
 <h2 id="structures-let-you-store-related-data"><a class="header" href="#structures-let-you-store-related-data">Structures let you store related data</a></h2>
-<p>리스프 구조체는, 명명된 slot과 관계된 데이터를 저장하는, object를 생성하는 방법을 여러분에게 제시합니다.</p>
-<pre><code class="language-lisp">(defstruct struct-1 color size shape position weight)
+<p>리스프 구조체는, 명명된 슬롯(slot)과 관계된 데이터를 저장하는, 오브젝트를 생성하는 방법을 여러분에게 제시합니다.</p>
+<pre><code class="language-lisp">(defstruct struct-1
+  color
+  size
+  shape
+  position
+  weight)
 ;;=&gt; STRUCT-1
 
 (setq object-2 (make-struct-1
@@ -1359,10 +1363,10 @@ object-1
                               :weight 10
                               :shape 'square))
 ;;=&gt; #S(STRUCT-1 :COLOR    GREEN
-                 :SIZE     SMALL 
-                 :SHAPE    SQUARE
-                 :POSITION NIL
-                 :WEIGHT   10)
+;;               :SIZE     SMALL 
+;;               :SHAPE    SQUARE
+;;               :POSITION NIL
+;;               :WEIGHT   10)
 
 (struct-1-shape object-2)
 ;;=&gt; SQUARE
@@ -1376,10 +1380,10 @@ object-1
 (struct-1-position object-2)
 ;;=&gt; (UNDER-TABLE)
 </code></pre>
-<p>이 예에서, 저희는 COLOR, SHAPE, SIZE, WEIGHT의 slot을 지닌 STRUCT-1 구조체를 정의하였습니다. 그런 다음 STRUCT-1의 instance를 만들고, 그 instance에 변수 OBJECT-2를 할당하였습니다. 예제의 나머지 부분은, struct-slot 이름으로된 접근자assessor 함수를 이용하여, 어떻게 구조체 instance의 slot에 접근하는지를 보여줍니다. 리스프는 DEFSTRUCT를 이용하여 구조체를 정의할때 make-structname과 structname-slotname 함수를 생성합니다.</p>
-<p>6장[p 112]에서 DEFSTRUCT의 optional 기능에 대해 살펴볼 것입니다.</p>
+<p>이 예에서, 저희는 <code>COLOR</code>, <code>SHAPE</code>, <code>SIZE</code>, <code>WEIGHT</code> 슬롯을 지닌 <code>STRUCT-1</code> 구조체를 정의하였습니다. 그런 다음 <code>STRUCT-1</code>의 인스턴스(instance)를 만들고, 해당 인스턴스를 변수 <code>OBJECT-2</code>에 할당하였습니다. 예제의 나머지 부분은, struct-slot 이름으로된 접근자(assessor) 함수를 이용하여, 어떻게 구조체 인스턴스의 슬롯에 접근하는지를 보여줍니다. 리스프는 <code>DEFSTRUCT</code>를 이용하여 구조체를 정의할때 <code>make-structname</code>과 structname-slotname 함수를 생성합니다.</p>
+<p>6장[p 112]에서 <code>DEFSTRUCT</code>의 optional 기능에 대해 살펴볼 것입니다.</p>
 <h2 id="type-information-is-apparent-at-runtime"><a class="header" href="#type-information-is-apparent-at-runtime">Type information is apparent at runtime</a></h2>
-<p>심볼은 runtime시 어떠한 변수 타입과도 연관지을 수 있습니다. 이것이 문제되는 경우에 대해, 리스프는 저희에게 값의 타입을 묻는것을 허용합니다</p>
+<p>심볼은 런타임시 어떠한 변수 타입과도 연관지을 수 있습니다. 이것이 문제되는 경우에 대해, 리스프는 저희에게 값의 타입을 묻는것을 허용합니다</p>
 <pre><code class="language-lisp">(type-of 123)
 ;;=&gt; FIXNUM
 
@@ -1395,10 +1399,10 @@ object-1
 (type-of '(a b c))
 ;;=&gt; CONS
 </code></pre>
-<p>TYPE-OF 는 인자의 종류type를 나타내는 심볼이나 리스트를 반환합니다. 게다가 이 정보는 인자의 종류의 기반하는 프로그램의 행동을 설명하는데 이용할 수 있습니다. TYPECASE 함수는 type 질의inquiry와 COND-와같은 분기dispatch를 결합한 것입니다.</p>
-<p>CLOS(14장 [p 157] 참조)S의 제네릭 함수의 도입으로, TYPE-OF는 예전만큼 중요하지는 않습니다.</p>
+<p><code>TYPE-OF</code> 는 인자의 타입을 나타내는 심볼이나 리스트를 반환합니다. 게다가 이 정보는 인자의 종류의 기반하는 프로그램의 행동을 설명하는데 이용할 수 있습니다. <code>TYPECASE</code> 함수는 타입에 대한 질의(inquiry)와 COND-와같은 분기(dispatch)를 결합한 것입니다.</p>
+<p>CLOS(14장 [p 157] 참조)S의 제네릭 함수의 도입으로, <code>TYPE-OF</code>는 예전만큼 중요하지는 않습니다.</p>
 <h2 id="hash-tables-provide-quick-data-access-from-a-lookup-key"><a class="header" href="#hash-tables-provide-quick-data-access-from-a-lookup-key">Hash Tables provide quick data access from a lookup key</a></h2>
-<p>해쉬 테이블은 값과 고유키unique key와 관련있습니다. property list완 다르게, 해쉬 테이블은 엄청나게 많은 키/값쌍에 매우 적합하지만, 작은 연관 set에 대해 엄청난 overhead를 감수해야합니다.</p>
+<p>해쉬 테이블은 값과 유니크 키(유일 키, unique key)와 관련있습니다. 프로퍼티 리스트완 다르게, 해쉬 테이블은 엄청나게 많은 키/값쌍에 매우 적합하지만, 작은 연관 set에 대해 엄청난 오버헤드(overhead)를 감수해야합니다.</p>
 <pre><code class="language-lisp">(setq ht1 (make-hash-table))
 ;;=&gt; #&lt;HASH-TABLE&gt;
 
@@ -1420,21 +1424,23 @@ object-1
 ;;=&gt; NIL
 ;;=&gt; T
 </code></pre>
-<p>MAKE-HASH-TABLE을 이용하여 해쉬 테이블을 생성하며, GETHASH를 이용하여 값에 접근합니다. GETHASH는 두 값을 반환합니다. 첫번째는 키와 관련있는 값입니다. 두번째는 키를 찾으면 T, 아니면 NIL입니다. 위 예제에서 처음과 마지막 GETHASH form의 차이를 주목하시기 바랍니다.</p>
-<p>기본적으로, 해쉬테이블은 EQ(이는 숫자나 list가 아닌 심볼에 대해서만 동작합니다)를 이용하여 이의 키를 비교하기 위해 만들어졌습니다. 17장[p 174]에서 동일성equality 판단predicates에 대해 더 자세히 배울 것입니다. 지금은, 다수의 키를 이용하고자 한다면, 이 폼을 이용하여 해쉬테이블을 만들어야한다는 것을 명심하시기 바랍니다:
-(make-hash-table :test #'eql)</p>
-<p>리스트를 키로 사용하고자 한다면, 이렇게 해쉬테이블을 만듭니다:
-(make-hash-table :test #'equal)</p>
-<p>키를 없애고자한다면, form (REMHASH key hash-table)를 이용합니다. 그리고 키에 해당하는 값을 바꾸고자한다면, 키/값쌍을 추가했던것처럼 GETHASH와 SETF를 이용합니다.</p>
+<p><code>MAKE-HASH-TABLE</code>을 이용하여 해쉬 테이블을 생성하며, <code>GETHASH</code>를 이용하여 값에 접근합니다. <code>GETHASH</code>는 두개의 값을 반환합니다. 첫번째는 키와 관련있는 값입니다. 두번째는 키를 찾으면 <code>T</code>, 아니면 <code>NIL</code>입니다. 위 예제에서 처음과 마지막 <code>GETHASH</code>폼의 차이를 주목하시기 바랍니다.</p>
+<p>기본적으로, 해쉬테이블은 <code>EQ</code>(이는 숫자나 리스트가 아닌 심볼에 대해서만 동작합니다)를 이용하여 이의 키를 비교하기 위해 만들어졌습니다. 17장[p 174]에서 동일성 판단(equality predicates)에 대해 더 자세히 배울 것입니다. 지금은, 다수의 키를 이용하고자 한다면, 이 폼을 이용하여 해쉬테이블을 만들어야한다는 것을 명심하시기 바랍니다:</p>
+<pre><code class="language-lisp">(make-hash-table :test #'eql)
+</code></pre>
+<p>리스트를 키로 사용하고자 한다면, 이렇게 해쉬테이블을 만듭니다:</p>
+<pre><code class="language-lisp">(make-hash-table :test #'equal)
+</code></pre>
+<p>키를 없애고자한다면, <code>(REMHASH key hash-table)</code>폼을 이용합니다. 그리고 키에 해당하는 값을 바꾸고자한다면, 키/값쌍을 추가했던것처럼 <code>GETHASH</code>와 <code>SETF</code>를 이용합니다.</p>
 <h2 id="packages-keep-names-from-colliding"><a class="header" href="#packages-keep-names-from-colliding">Packages keep names from colliding</a></h2>
 <p>프로그램을 작성하는것에 관한 어려운 일중 하나는 프로그램의 이름을 짓는 부분입니다. 한편으론, 기억하기 쉽고 명명된 object의 규칙과 목적을 환기evocative시켜주는 이름을 이용하기 원할 것입니다. 다른 한편으론, 언젠가 여러분의 프로그램과 작업하게될, 다른 프로그램의 어딘가에 이미 사용한 (혹은 사용될 것 같은)이름을 이용하지 않길 원할 것입니다.</p>
-<p>이름충돌naming conflict을 피하는 법 중 하나는 프로그램에 있는 모든 이름에 누구도 사용하지 않는 고유 접두사prefix를 붙이는 것입니다. 여러분은 이것이 라이브러리에 매번 필요하다고 생각할 것입니다 - 보통 하나에서 세개정도 문자의 접두사가 있다. 불행히도, 여전히 두 소프트웨어 개발자가 동일한 prefix를 선택하기 위한 많은 관문이 남아있습니다; 유달히 몇몇 prefix들이 다른 것보다 더욱 evocative하기 때문입니다. 여러분이 생산한 모든 소프트웨어를 제어하고자 한다면, 모든 prefix를 선택하고 문제를 피할 수 있습니다. prefix naming scheme을 이용하는 third-parfy 소프트웨어를 사고자 한다면, 제조사에 의해 선택된 이름에 관련된 일을 해야할 것이며, 두 제조사가 우연히 동일한 prefix를 사용하지 않기를 희망할 것입니다.</p>
+<p>이름 충돌(naming conflict)을 피하는 법 중 하나는 프로그램에 있는 모든 이름에 누구도 사용하지 않는 고유 접두사(prefix)를 붙이는 것입니다. 여러분은 이것이 라이브러리에 매번 필요하다고 생각할 것입니다 - 보통 하나에서 세개정도 문자의 접두사가 있다. 불행히도, 여전히 두 소프트웨어 개발자가 동일한 prefix를 선택하기 위한 많은 관문이 남아있습니다; 유달히 몇몇 prefix들이 다른 것보다 더욱 evocative하기 때문입니다. 여러분이 생산한 모든 소프트웨어를 제어하고자 한다면, 모든 prefix를 선택하고 문제를 피할 수 있습니다. prefix naming scheme을 이용하는 third-parfy 소프트웨어를 사고자 한다면, 제조사에 의해 선택된 이름에 관련된 일을 해야할 것이며, 두 제조사가 우연히 동일한 prefix를 사용하지 않기를 희망할 것입니다.</p>
 <p><img src="ch03/../res/prefixed-names..gif" alt="prefixed-names.gif" /></p>
-<p>naming conflicts 피하는 또 하나의 방법은 qualified name을 이용하는 것입니다. 이를 하기 위해선, 언어가 프로그래머에 의해 정의되고 제어되는 분리된 이름공간의 지원을 제공해야 합니다. 어떻게 이것이 동작하는지 이해하기 위해, 프로그램을 위해 여러분이 만든 모든 이름이 여러분의 이름이 타이틀 상단에 쓰여진 한장에 종이에 작성되었다고 상상해보시기 바랍니다. 이름이 이용하기에 안전한지 확인하기 위해선, 여러분이 이 페이지에 작성한 이름 목록을 확인하기만 하면 됩니다. 누군가의 소프트웨어가 여러분의 프로그램의 서비스를 필요로 할때, 그것은 여러분의 qualifier와 name을 이용하여 여러분의 이름을 참조합니다. 다른이의 소프트웨어는 다른 qualifier를 지니고 그들의 qualifier는 그들만의 name을 암시하기에(이것을 작성할 필요는 없습니다), 이름 충돌을 피할 방도가 없습니다.</p>
+<p>이름 충돌을 피하는 또 하나의 방법은 qualified name을 이용하는 것입니다. 이를 하기 위해선, 언어가 프로그래머에 의해 정의되고 제어되는 분리된 이름공간의 지원을 제공해야 합니다. 어떻게 이것이 동작하는지 이해하기 위해, 프로그램을 위해 여러분이 만든 모든 이름이 여러분의 이름이 타이틀 상단에 쓰여진 한장에 종이에 작성되었다고 상상해보시기 바랍니다. 이름이 이용하기에 안전한지 확인하기 위해선, 여러분이 이 페이지에 작성한 이름 목록을 확인하기만 하면 됩니다. 누군가의 소프트웨어가 여러분의 프로그램의 서비스를 필요로 할때, 그것은 여러분의 qualifier와 name을 이용하여 여러분의 이름을 참조합니다. 다른이의 소프트웨어는 다른 qualifier를 지니고 그들의 qualifier는 그들만의 name을 암시하기에(이것을 작성할 필요는 없습니다), 이름 충돌을 피할 방도가 없습니다.</p>
 <p>여러분은 qualifier는 이름에 prefix를 붙이기 위한 복잡한 방법에 지나지 않는다고 생각할 것입니다. 그러나, 거기엔 미묘하며 중대한 차이점이 있습니다. prefix는 이름의 일부입니다; 이는 한번 작성되면 바뀔 수 없습니다. qualifier는 이가 qualify한 이름에서 분리되었으며, 정확히 한 장소에서 &quot;작성&quot;되었습니다. 더욱이, 여러분은 이름들이 쓰여진 &quot;종이&quot;를 가리켜 이를 &quot;그러한 이름들&quot;이라 말할 수 있습니다. 다른 프로그래머와 동일한 qualifier를 선택하게 된다면, 여러분은 여전히 여러분이 선택한 qualifier에 의해 &quot;그 이름&quot;을 참조할 수 있습니다 - 다른 말로 하자면, 여러분이 사용할 소프트웨어가 출고된 후에도, 여러분은 qualifier를 바꿀 수 있습니다.</p>
 <p><img src="ch03/../res/rename-package.gif" alt="rename-package.gif" /></p>
-<p>위 예제에는, 파일 LIB1과 LIB2에서 가져온 두 라이브러리가 있습니다. 두 라이브러리 설계자는, 리스프에서 package 이름으로 알려진, 이름 공간namespace을 위해 UTIL이란 이름을 사용하였습니다. 각 라이브러리는 client에게 보여지는 이름들을 나열list했습니다. 두 라이브러리를 이용하는 프로그래머는 MY-PACKAGE란 package 이름에서 코드를 작성합니다. 각 라이브러리를 로드한후, 프로그래머는 이의 package의 이름을 다른 이름으로 바꿉니다. 그러면, UTIL-1:INITIALIZE와 UTIL-2:INITIALIZE의 호출에서 봤던 것처럼, 라이브러리에 있는 이름들은 이름이 바뀐 qualifier를 이용하여 참조됩니다. 프로그래머는 여전히 qualify 폼이 아닌 INITIALIZE 이름은 이용할 수 있다는 것을 주목하시기 바랍니다 - 이는 MY-PACKAGE:INITIALIZE와 동일합니다.</p>
-<p>리스프는 package facility라 알려진 함수와 매크로를 통해 이러한 기능을 제공합니다. DEFPACKAGE 매크로는 간편하게 대부분의 package 연산을 제공하는데 반해, IN-PACKAGE 매크로는 현재 package를 설정합니다:</p>
+<p>위 예제에는, 파일 LIB1과 LIB2에서 가져온 두 라이브러리가 있습니다. 두 라이브러리 설계자는, 리스프에서 패키지 이름으로 알려진, 이름 공간namespace을 위해 UTIL이란 이름을 사용하였습니다. 각 라이브러리는 client에게 보여지는 이름들을 나열했습니다. 두 라이브러리를 이용하는 프로그래머는 <code>MY-PACKAGE</code>란 패키지 이름에서 코드를 작성합니다. 각 라이브러리를 로드한후, 프로그래머는 이의 package의 이름을 다른 이름으로 바꿉니다. 그러면, <code>UTIL-1:INITIALIZE</code>와 <code>UTIL-2:INITIALIZE</code>의 호출에서 봤던 것처럼, 라이브러리에 있는 이름들은 이름이 바뀐 qualifier를 이용하여 참조됩니다. 프로그래머는 여전히 qualify 폼이 아닌 INITIALIZE 이름은 이용할 수 있다는 것을 주목하시기 바랍니다 - 이는 <code>MY-PACKAGE:INITIALIZE</code>와 동일합니다.</p>
+<p>리스프는 package facility라 알려진 함수와 매크로를 통해 이러한 기능을 제공합니다. <code>DEFPACKAGE</code> 매크로는 간편하게 대부분의 패키지 연산을 제공하는데 반해, <code>IN-PACKAGE</code> 매크로는 현재 패키지를 설정합니다:</p>
 <pre><code class="language-lisp">;;;; file: util1.lisp
 (defpackage util1
   (:export init func1 func2)
@@ -1538,9 +1544,9 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 ------------------------------
 &lt;tab&gt; &lt;space&gt; &lt;page&gt; &lt;newline&gt; &lt;return&gt; &lt;linefeed&gt;
 </code></pre>
-<p>READ가 구성문자(constituent character)로 시작한다면, 이는 심볼이나 number를 축적합니다. READ가 종료매크로문자(terminating macro character)나 공백문자(whitespace character)를 만나면, 이는 모아진 구성문자를 우선 숫자로, 그 다음 symbol로 이해interpret하려 시도합니다. 수치화 해석이 가능하다면, READ는 숫자를 반환합니다. 그렇지 않으면, READ는 영문자를 standard case(보통 대문자)로 바꾸어, symbol로써 이름을 intern하여, 심볼을 반환합니다.</p>
+<p><code>READ</code>가 구성문자(constituent character)로 시작한다면, 이는 심볼이나 숫자를 축적합니다. <code>READ</code>가 종료 매크로 문자(terminating macro character)나 공백 문자(whitespace character)를 만나면, 이는 모아진 구성문자를 우선 숫자로, 그 다음 symbol로 이해interpret하려 시도합니다. 수치화 해석이 가능하다면, <code>READ</code>는 숫자를 반환합니다. 그렇지 않으면, <code>READ</code>는 영문자를 standard case(보통은 대문자)로 바꾸어, 심볼로써 이름을 intern하여, 심볼을 반환합니다.</p>
 <p>예외문자(Escape characters)는 특별한 역활을 수행합니다. 하나의 예외문자는 다음에 나오는 문자를 마치 constituent character처럼 다루도록 합니다. 보통 공백이나 종료매크로문자로 취급되는 문자는 심볼의 일부가 될 수 있습니다. READ가 escape character를 만나면, 숫자들로만 된것이 escape될지라도, constituents 결과를 숫자로 interpret 하려 하지 않을 것입니다</p>
-<p>READ가 매크로 문자(macro character)로 시작한다면, 문자는 다음 경우를 판별할 것입니다.</p>
+<p><code>READ</code>시 매크로 문자(macro character)로 시작한다면, 문자는 다음 경우를 판별할 것입니다.</p>
 <div class="table-wrapper"><table><thead><tr><th>문자</th><th>설명</th></tr></thead><tbody>
 <tr><td>&quot;</td><td>문자열을 읽는다.</td></tr>
 <tr><td>’</td><td>폼을 읽는다.</td></tr>
@@ -1572,8 +1578,8 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 =  \newline #&lt;HASH-TABLE&gt; \space
 ;;=&gt; #&lt;HASH-TABLE&gt;
 </code></pre>
-<p>PRINT는 개행문자(<code>\newline</code>)로 시작하고 띄어쓰기(<code>\space</code>)으로 끝나는 결과물을 출력합니다. 개행과 띄어쓰기 모두 공백(whitespace)으로 취급되므로, (escape가 아닌)리스프 오브젝트가 출력된 표현의 일부가 될수 없기에, 이는 PRINT 결과물이 다른 결과물과는 다르다는 것을 보증합니다.</p>
-<p>PRINT의 다른 변종들은 다양한 쓰임세를 지녔습니다. PRIN1은 PRINT처럼 행동하지만, whitespace로 감싸지 않습니다. 예를들어 연이은 조각들로부터 이름을 만들고자 할때, 이는 유용할 것입니다. PRINC는 PRIN1처럼 행동하지만, 보여는것 보단 READ를 위한 결과물을 생성합니다; 예를들어, PRINC는 문자열을 둘러싸는 쌍따옴표(quotes)를 생략하며, escape character를 출력하지 않습니다.</p>
+<p><code>PRINT</code>는 개행문자(<code>\newline</code>)로 시작하고 띄어쓰기(<code>\space</code>)으로 끝나는 결과물을 출력합니다. 개행과 띄어쓰기 모두 공백(whitespace)으로 취급되므로, (escape가 아닌)리스프 오브젝트가 출력된 표현의 일부가 될수 없기에, 이는 PRINT 결과물이 다른 결과물과는 다르다는 것을 보증합니다.</p>
+<p><code>PRINT</code>의 다른 변종들은 다양한 쓰임세를 지녔습니다. <code>PRIN1</code>은 <code>PRINT</code>처럼 행동하지만, whitespace로 감싸지 않습니다. 예를들어 연이은 조각들로부터 이름을 만들고자 할때, 이는 유용할 것입니다. PRINC는 PRIN1처럼 행동하지만, 보여는것 보단 READ를 위한 결과물을 생성합니다; 예를들어, PRINC는 문자열을 둘러싸는 쌍따옴표(quotes)를 생략하며, escape character를 출력하지 않습니다.</p>
 <pre><code class="language-lisp">(print ’a\ bc)
 ;;&gt;&gt;  \newline  |A BC| \space
 ;;=&gt; |A BC|
@@ -1586,9 +1592,9 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 ;;&gt;&gt; \newline  A BC \space
 ;;=&gt; |A BC|
 </code></pre>
-<h2 id="open-and-close-let-you-work-with-files"><a class="header" href="#open-and-close-let-you-work-with-files">OPEN and CLOSE let you work with files</a></h2>
-<p>보통, READ는 키보드를 읽고 PRINT는 화면에 출력합니다. 이러한 함수 모두 optional 인자를 취합니다; 인자는 READ를 위한 input stream과 PRINT를 위한 output stream을 지정합니다. stream은 무엇일까요? stream은 데이터의 근원(source)나 밑바닥(sink)이며, 보통 (그치만 절대적이지는 않은) 문자(characters)입니다. 이제부터, 저희는 tex file이 어떻게 문자 stream의 source나 sink가 될 수 있는지를 살펴볼 것입니다. 19장 [p 183]에서 저희는 몇몇 다른 가능성들을 살펴볼 것입니다.</p>
-<p>여러분은, 파일 이름을 인자로 취하고 stream의 방향(input이나 output)을 결정하는 keyword 인자를 취하는, OPEN 함수를 이용하여 stream을 파일로 붙일 수 있습니다. stream에 관한 작업을 종료하고 관련된 file을 닫기 위해선, CLOSE 함수를 사용합니다.</p>
+<h2 id="open과-close는-파일을-다룰-수-있게-한다"><a class="header" href="#open과-close는-파일을-다룰-수-있게-한다">OPEN과 CLOSE는 파일을 다룰 수 있게 한다.</a></h2>
+<p>보통, <code>READ</code>는 키보드를 읽고 <code>PRINT</code>는 화면에 출력합니다. 이러한 함수 모두 옵셔널(optional) 인자를 취합니다; 인자는 <code>READ</code>를 위한 입력 스트림과 <code>PRINT</code>를 위한 출력 스트림을 지정합니다. 스트림(stream)은 무엇일까요? 스트림은 데이터의 근원(source)이자 밑바닥(sink)이며, 보통 (그치만 절대적이지는 않은) 문자(characters)입니다. 이제부터, 저희는 tex file이 어떻게 문자 stream의 source나 sink가 될 수 있는지를 살펴볼 것입니다. 19장 [p 183]에서 저희는 몇몇 다른 가능성들을 살펴볼 것입니다.</p>
+<p>여러분은, 파일 이름을 인자로 취하고 스트림의 방향(입력과 출력)을 결정하는 키워드 인자를 취하는, <code>OPEN</code> 함수를 이용하여 스트림을 파일로 붙일 수 있습니다. 스트림에 관한 작업을 종료하고 관련된 파일을 닫기 위해선, <code>CLOSE</code> 함수를 사용합니다.</p>
 <pre><code class="language-lisp">(setq out-stream (open &quot;my-temp-file&quot; :direction :output))
 ;;=&gt; #&lt;OUTPUT-STREAM &quot;my-temp-file&quot;&gt;
 
@@ -1607,10 +1613,10 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 (close in-stream)
 ;;=&gt; T
 </code></pre>
-<p>이 예제에서, 저희는 my-temp-file에 대한 output stream을 만들고, symbol ABC를 그 stream에 출력하였습니다. 인자는 평상시처럼 반환하지만 출력을 하지 않는 다는 것을 주목하시기 바랍니다 - 대신, 출력된 결과는 파일로 갑니다.</p>
-<p>다음으로, output stream을 닫고 동일한 파일에 input stream을 열었습니다. 그런 다음 저희가 file에 출력한 심볼을 읽어온 다음, input stream을 닫음으로써 끝을 맺습니다.</p>
+<p>이 예제에서, 저희는 <code>my-temp-file</code>에 대한 출력 스트림을 만들고, 심볼 <code>ABC</code>를 그 스트림에 출력하였습니다. 인자는 평상시처럼 반환하지만 출력을 하지 않는 다는 것을 주목하시기 바랍니다 - 대신, 출력된 결과는 파일로 갑니다.</p>
+<p>다음으로, 출력 스트림을 닫고 동일한 파일에 입력 스트림을 열었습니다. 그런 다음 저희가 파일에 출력한 심볼을 읽어온 다음, 입력 스트림을 닫음으로써 끝을 맺습니다.</p>
 <h2 id="variations-on-a-print-theme"><a class="header" href="#variations-on-a-print-theme">Variations on a PRINT theme</a></h2>
-<p>리스프는 또한, 이러한 옵션을 제어하는 keyword 인자를 이용하여, 여러분에게 출력에 대해 더욱 세부적인 것에 관한 제어권을 주는 WRITE 함수를 제공합니다:</p>
+<p>리스프는 또한, 이러한 옵션을 제어하는 키워드 인자를 이용하여, 여러분에게 출력에 대해 더욱 세부적인 것에 관한 제어권을 주는 <code>WRITE</code> 함수를 제공합니다:</p>
 <div class="table-wrapper"><table><thead><tr><th>Keyword Argument</th><th>Default Value</th><th>Action</th></tr></thead><tbody>
 <tr><td>:stream</td><td><code>t</code></td><td>set output stream</td></tr>
 <tr><td>:escape</td><td><code>*print-escape*</code></td><td>include escape characters</td></tr>
@@ -1630,7 +1636,7 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 <tr><td>:pprint-dispatch</td><td><code>*print-pprint-dispatch*</code></td><td>&quot;</td></tr>
 </tbody></table>
 </div>
-<p>우연하게도, 위에 키워드 인자의 기본값으로 나온 변수들은 또한 PRINT의 연산을 제어합니다. 여러분은, PRIN1을 감싸는 LET 폼에서 이러한 변수들을 binding 함으로써, non-default keyword 인자로 WRITE의 효과를 얻을 수 있습니다:</p>
+<p>우연하게도, 위에 키워드 인자의 기본값으로 나온 변수들은 또한 <code>PRINT</code>의 연산을 제어합니다. 여러분은, <code>PRIN1</code>을 감싸는 <code>LET</code> 폼에서 이러한 변수들을 바인딩 함으로써, non-default 키워드 인자로 <code>WRITE</code>의 효과를 얻을 수 있습니다:</p>
 <pre><code class="language-lisp">(write foo
        :pretty t
        :right-margin 60
@@ -1642,7 +1648,7 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
       (*print-case* :downcase))
   (prin1 foo))
 </code></pre>
-<p>PRINT가 추가하는 앞에 newline이 있고 뒤에 빈칸(blank)이 오는걸 원치 않기에, <code>print</code>가 아닌 <code>prin1</code>를 사용하였습니다.</p>
+<p><code>PRINT</code>가 추가하는 앞에 newline이 있고 뒤에 빈칸(blank)이 오는걸 원치 않기에, <code>print</code>가 아닌 <code>prin1</code>를 사용하였습니다.</p>
 <p>여러분의 프로그램이 <code>*PRINT-...*</code> 변수를 바꾸지만, 프로그램의 어느 지점에서 기본 값(default value)을 쓰고자 한다면, <code>with-standard-io-syntax</code> 폼으로 프로그램의 일부를 감쌀 수 있습니다:</p>
 <pre><code class="language-lisp">;;프로그램의 printer control을 정의한다.
 (setq *print-circle* t)
