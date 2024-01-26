@@ -178,7 +178,81 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="레슨-09-필수---다중-값"><a class="header" href="#레슨-09-필수---다중-값">레슨 09. 필수 - 다중 값</a></h1>
+                        <h1 id="레슨-09-필수---다중-값essential-multiple-values"><a class="header" href="#레슨-09-필수---다중-값essential-multiple-values">레슨 09. 필수 - 다중 값(Essential Multiple Values)</a></h1>
+<ul>
+<li><a href="https://dept-info.labri.fr/~strandh/Teaching/MTP/Common/David-Lamkins/chapter03-09.html">원문</a></li>
+</ul>
+<h2 id="대다수의-폼은-하나의-값만-만든다"><a class="header" href="#대다수의-폼은-하나의-값만-만든다">대다수의 폼은 하나의 값만 만든다</a></h2>
+<p>폼은 보통 하나의 값을 반환합니다. 리스프는 여러개의 값을 생성하거나 받을 수 있는 폼을 갖고 있습니다.</p>
+<h2 id="values는-여러개의-값을-생성하거나-아무것도-생성하지-않는다"><a class="header" href="#values는-여러개의-값을-생성하거나-아무것도-생성하지-않는다">VALUES는 여러개의 값을 생성하거나 아무것도 생성하지 않는다.</a></h2>
+<p><code>values</code> 폼은 0개 이상의 값을 반환합니다:</p>
+<pre><code class="language-lisp">(values)
+;;=&gt;
+
+(values :this)
+;;=&gt; :THIS
+
+(values :this :that)
+;;=&gt; :THIS
+;;=&gt; :THAT
+</code></pre>
+<p>폼의 평가에 의해 생성된 여러 라인이으로, 얼마나 많은 값이 반환되었는지 보았습니다. 위의 예제에서 3개의 <code>values</code> 폼에서 각각 0개, 1개, 2개의 값을 생성하였습니다.</p>
+<p><code>values</code>는 함수이며, 따라서 인자를 평가합니다.</p>
+<h2 id="몇몇-특수한-폼은-여러개의-값을-받을-수-있다"><a class="header" href="#몇몇-특수한-폼은-여러개의-값을-받을-수-있다">몇몇 특수한 폼은 여러개의 값을 받을 수 있다.</a></h2>
+<p>:TODO(pyoung)
+하나의 프로그램에서 다수의 값으로 무얼 하길 원하십니까? 가장 기본적인 동작은 :</p>
+<ol>
+<li>각 값들을 개별 심볼로 바인드한다, 혹은</li>
+<li>값들을 리스트로 모은다.</li>
+</ol>
+<p>각 값들을 개별 심볼로 바인드하기 위해 <code>multiple-value-bind</code>를 이용합니다:</p>
+<pre><code class="language-lisp">(multiple-value-bind (a b c) (values 2 3 5)
+  (+ a b c))
+;;=&gt; 10
+</code></pre>
+<p>심볼의 갯수보다 더 많은 값을 넘기면, 초과된 값은 무시됩니다:</p>
+<pre><code class="language-lisp">(multiple-value-bind (a b c) (values 2 3 5 'x 'y)
+     (+ a b c))
+;;=&gt; 10
+</code></pre>
+<p>심볼의 갯수보다 더 적은 값을 넘기면, 나머지 심볼들은 <code>NIL</code>로 바인드됩니다:</p>
+<pre><code class="language-lisp">(multiple-value-bind (w x y z) (values :left :right)
+     (list w x y z))
+;;=&gt; (:LEFT :RIGHT NIL NIL)
+</code></pre>
+<h2 id="몇몇-폼은-여러값multiple-values그대로-넘긴다"><a class="header" href="#몇몇-폼은-여러값multiple-values그대로-넘긴다">몇몇 폼은 여러값(multiple values)그대로 넘긴다.</a></h2>
+<p>몇몇 폼은 새로운 값을 생성하는 것 대신에, 마지막 값을 본체로 넘김니다. 예제는 <code>let</code>, <code>cond</code>, <code>defun</code>, <code>lambda</code>의 본체를 포함합니다.</p>
+<pre><code class="language-lisp">(let ((a 1)
+      (b 2))
+  (values a b))
+;;=&gt; 1
+;;=&gt; 2
+
+(cond (nil 97)
+      (t (values 3 4)))
+;;=&gt; 3
+;;=&gt; 4
+
+(defun foo (p q)
+  (values (list :p p) (list :q q)))
+;;=&gt; FOO
+
+(foo 5 6)
+;;=&gt; (:P 5)
+;;=&gt; (:Q 6)
+
+((lambda (r s) (values r s)) 7 8)
+;;=&gt; 7
+;;=&gt; 8
+</code></pre>
+<p>함수와 <code>lambda</code> 본체의 경우엔, &quot;암묵적인 PROGN&quot;라는 것으로 부터 다수의 값이 반환되었습니다. 이는, 본체가 다수의 폼을 포함할 수 있으며, 오직 마지막 form의 값이 반환될거라고, 멋지게 말하는 방법입니다.</p>
+<p>여러분은 이러한 행동을 원할때 <code>progn</code> 스페실 폼을 이용할 수 있습니다. <code>(PROGN form1 form2 ... formN)</code> 은 순서대로 <code>form1</code>부터 <code>formN</code>까지 평가하고, 최종적으로 <code>formN</code>의 값을 반환합니다.</p>
+<h2 id="짚고-넘어가기"><a class="header" href="#짚고-넘어가기">짚고 넘어가기</a></h2>
+<ul>
+<li><code>values</code></li>
+<li><code>multiple-value-bind</code></li>
+<li><code>progn</code></li>
+</ul>
 
                     </main>
 
