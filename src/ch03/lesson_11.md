@@ -3,7 +3,7 @@
 - [원문](https://dept-info.labri.fr/~strandh/Teaching/MTP/Common/David-Lamkins/chapter03-11.html)
 
 
-## READ는 리스프 데이터를 받는다.
+## READ는 리스프 데이터를 받는다
 
  [레슨 10](./lesson_10.md)에서 봤던것처럼, `read`는 문자를 리스프 데이터로 변환시킵니다. 이제까지, 우리들은 리스프 데이터 여러 출력 값들을 살펴 보았습니다:
 
@@ -116,7 +116,8 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 ;;=> |A BC|
 ```
 
-## OPEN과 CLOSE는 파일을 다룰 수 있게 한다.
+
+## OPEN과 CLOSE는 파일을 다룰 수 있게 한다
 
  보통, `READ`는 키보드를 읽고 `PRINT`는 화면에 출력합니다. 이러한 함수 모두 옵셔널(optional) 인수를 취합니다; 인수로 `READ`를 위한 입력 스트림과 `PRINT`를 위한 출력 스트림을 지정합니다. 스트림(stream)은 무엇일까요? 스트림은 데이터의 소스(source)이자 밑바닥(sink)이며, 보통은 (그치만 절대적이지는 않은) 문자들(characters)입니다. 이제부터, 저희는 텍스트 파일이 어떻게 문자 스트림의 소스가 될 수 있는지를 살펴볼 것입니다. 19장 [p 183]에서 저희는 몇몇 다른 가능성들을 살펴볼 것입니다.
 
