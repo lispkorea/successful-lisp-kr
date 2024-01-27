@@ -182,28 +182,24 @@
 <ul>
 <li><a href="https://dept-info.labri.fr/~strandh/Teaching/MTP/Common/David-Lamkins/chapter03-10.html">원문</a></li>
 </ul>
-<h2 id="리스프는-거의-항상-숫자를-제대로-처리한다"><a class="header" href="#리스프는-거의-항상-숫자를-제대로-처리한다">리스프는 거의 항상 숫자를 제대로 처리한다.</a></h2>
-<p>이는 말하기에 이상한 것처럼 들립니다. 컴퓨터는 항상 숫자로 일을 수행하지 않나요?  음, 아니요... 보통은 그렇지 않습니다.</p>
-<p>수치 계산은 수많은 방식으로 나뉠 수 있습니다. 가장 큰 문제가 되는 점 중 하나는 소수의 계산이 있습니다 (여러분의 언어가 이를 실수라 부른다면, 그것은 거짓말 입니다). 비쥬얼 어쩌고 혹은 객체 지향 블라블라와 같은 많은 책들 중 대다수가 소수의 계산에 대해 써져있습니다.</p>
-<p>소수의 문제는 수학적으로 실수가 아니지만, 종종 실수인양 (잘못) 사용된다는 점입니다.
-중요한 문제는 소수를 그렇게 사용한다면, 정확도의 한계를 지니게 된다는 것 입니다 - 소수점 우측 몇개의 자릿수 만큼. 이제, 계산에 사용되는 모든 숫자가 거의 같은 규모라면, 계산의 정확도가 떨어지지 않을 수 도 있을 것입니다. 그러나, 매우 다양한 규모의 숫자들이라면, 소수점 계산은 정확도를 희생할 것입니다.</p>
+<h2 id="리스프는-대부분의-숫자를-제대로-처리한다"><a class="header" href="#리스프는-대부분의-숫자를-제대로-처리한다">리스프는 대부분의 숫자를 제대로 처리한다.</a></h2>
+<p>뭔가 이상한 소리처럼 들립니다. 컴퓨터는 항상 숫자로 일을 처리하지 않나요?  음, 아닙니다... 보통은 그렇지 않습니다.</p>
+<p>수의 계산은 수 많은 방식으로 나뉠 수 있습니다. 가장 큰 문제가 되는 점 중 하나는 소수점(floating point) 계산이 있습니다 (혹여 여러분이 쓰고 있는 프로그래밍 언어가 이를 실수(real)라 부른다면, 아마 거짓말일 것입니다). 비쥬얼 어쩌고저쩌고 혹은 객체 지향 블라블라와 같은 많은 책들 중 대다수가 이 소수점 계산을 다루고 있습니다.</p>
+<p>소수점에서의 문제는 수학적으로 실수(real)가 아니지만, 종종 실수(real)인양 (잘못) 사용된다는 점입니다. 중대한 문제는 소수를 그렇게 사용한다면, 정확도에 한계가 생긴다는 점 입니다 - 소수점 우측 몇개의 자릿수 만큼. 이제, 계산에 사용되는 모든 숫자가 거의 같은 규모의 수라면, 계산의 정확도가 떨어지지 않을 수 있을 것입니다. 그러나, 규모가 매우 차이나는 숫자들이라면, 소수점 계산은 정확도가 희생될 것입니다.</p>
 <p>여러분의 컴퓨터의 소수가 정확하게 소숫점 7자리를 표현할수 있다고 가정해 봅시다. 그러면, 여러분은 <code>1897482.0</code>에 <code>2973225.0</code>를 더하면 완벽히 정확한 답을 얻을 수 있을 것입니다. 그러나, <code>1897482.0</code>에 <code>0.2973225</code>를 더하고자 한다면, 정확한 답은 <code>14</code>자리의 숫자이지만, 여러분의 컴퓨터는 <code>1897482.0</code>을 답으로 할 것입니다.</p>
-<p>소수에 관한 또 다른 문제는 더욱 미묘합니다. 프로그램을 작성할때 보통 10진수에 기반하여 수를 사용할 것입니다. 그러나 컴퓨터는 모든 연산을 2진수에 기반하여 수행합니다. 10진수에서 2진수로의 변환은 어떤 &quot;명백히 정확한&quot; 특정 숫자에 대해 재미난 일을 수행합니다. 예를들어, 소수 <code>0.1</code>은 2진수로 변환하면 순환 분수입니다. 컴퓨터는 순환분수에 의해 요구되는 무한한 숫자를 저장하지 못하기에, 정확하게 0.1을 저장할 수 없습니다.</p>
-<p>대부분의 컴퓨터 언어에서 정수(자연수) 연산은 또다른 문제를 지닙니다</p>
-<ul>
-<li>하나의 정수를 담을 수 있는 양수나 음수의 최대치에 제한을 가하는 경향이 있습니다. 따라서, 숫자 하나를 여러분의 언어에 대해 컴퓨터를 다룰 수 있는 가장 큰 정수에 더하고자 한다면, 둘 중 하나가 일어납니다:</li>
-</ul>
+<p>소수에 관한 또 다른 문제는 더욱 미묘합니다. 프로그램을 작성할때 보통 10진수에 기반하여 수를 사용할 것입니다. 그러나 컴퓨터는 모든 연산을 2진수에 기반하여 수행합니다. 10진수에서 2진수로의 변환은 어떤 &quot;명백히 정확한&quot; 특정 숫자에 대해 재미난 일을 수행합니다. 예를들어, 소수 <code>0.1</code>은 2진수로 변환하면 순환 분수가 됩니다. 컴퓨터는 순환분수가 요구하는 무한한 숫자를 저장하지 못하기에, 0.1의 값을 정확히 저장할 수 없습니다.</p>
+<p>또, 정수(자연수) 연산에 관한 문제를 대부분의 컴퓨터 언어들이 가지고 있습니다 - 하나의 정수를 담을 수 있는 양수나 음수의 최대치에 제한이 있는 경향이 있습니다. 따라서, 숫자 하나를 여러분의 언어에 대해 컴퓨터를 다룰 수 있는 가장 큰 정수에 더하고자 한다면, 둘 중 하나가 일어납니다:</p>
 <ol>
-<li>에러로 프로그램이 종료된다, 혹은</li>
-<li>굉장히 부정확한 답을 얻는다.(가장 큰 양수에 1을 더한 것은 가장 작은 음수를 만들어 냅니다.)</li>
+<li>에러가 발생해 프로그램이 종료된다.</li>
+<li>혹은, 굉장히 부정확한 답을 얻는다. (가장 큰 양수에 1을 더한게 가장 작은 음수를 만들어 낸다던가.)</li>
 </ol>
-<p>그러면 숫자에 관해 올바른 일을 수행하기 위해 리스프는 어떻게 처리할까요? 무엇보다도, 이 문제가 컴퓨터의 연산에서 나온 것처럼 보입니다. 답은 리스프는 내장 컴퓨터 산술 연산을 바로 사용하지 않는다는 것입니다 - 수학적으로 정확한 특정한 수치 데이터 형식을 추가하였습니다:</p>
+<p>그렇다면 리스프는 숫자를 어떻게 올바르게 처리할까요? 우선, 이 문제가 컴퓨터의 연산에서 비롯된 것처럼 보입니다. 그렇다면 답은 컴퓨터 내장 산술 연산을 리스프는 직접 사용하지 않는 것입니다 - 수학적으로 정확한 특정 수치 데이터 형식을 추가하였습니다:</p>
 <ul>
-<li><code>bignum</code>은 무한한 정수이다 (컴퓨터의 메모리의 한계에 달려있다)</li>
-<li>유리수는 나눗셈 알고리즘에서 나온 대략적인 소수가 아니라 두 정수의 정확한 몫이다.</li>
+<li><code>bignum</code>은 무한한 정수이다 (컴퓨터 메모리의 한계에 달려있습니다)</li>
+<li>유리수는 두 정수의 정확한 몫이며, 나눗셈 알고리즘에서 나온 대략적인 소수가 아니다.</li>
 </ul>
-<p>물론, 리스프 또한 머신 기반 정수와 소수를 지닙니다. 머신에서의 정수를 리스프에서 <code>fixnum</code>라 부릅니다. <code>fixnum</code>의 범위에서 자연수가 떨어지면, 리스프는 이를 머신의 정수로 저장할 것입니다. 그러나, 이게 매우 커지면, 리스프는 자동으로 이를 <code>bignum</code>으로 승격시킬 것입니다.</p>
-<p>앞서 리스프는 거의 항상 수에 관해 올바른 일을 수행한다고 말했는데, <code>거의 항상 수학적으로 옳은 수의 표현을 고른다</code> 라는 의미로 말했었습니다:</p>
+<p>물론, 리스프 또한 머신 기반 정수와 소수를 지닙니다. 머신에서의 정수를 리스프에서 <code>fixnum</code>라 부릅니다. <code>fixnum</code>의 범위에서 자연수를 넘겨받으면, 리스프는 이를 머신의 정수로 저장할 것입니다. 그러나, 이게 너무 커지면, 리스프는 자동으로 이를 <code>bignum</code>으로 승격시킬 것입니다.</p>
+<p>앞서 리스프는 대부분의 숫자를 제대로 처리한다고 말했는데, <code>거의 항상 수학적으로 옳은 수의 표현을 고른다</code> 라는 의미로 말했었습니다:</p>
 <pre><code class="language-lisp">(/ 1 3)
 ;;=&gt; 1/3
 
@@ -220,8 +216,7 @@
 ;;   929638952175999932299156089414639761565182862536979208272
 ;;   23758251185210916864000000000000000000000000
 </code></pre>
-<p>:TODO(pyoung)
-소수를 사용하여 계산을 할 수 도 있지만, 리스프는 정확한 수치 결과를 부정확한 소수로 전환할 수 없기에(여러분은 이에게 소수는 전염된다라고 말해야 합니다) 일단 이를 계산에 도입하면, 전체 계산 결과는 소수를 유지할 것입니다:</p>
+<p>소수점를 활용한 계산을 작성할 수 도 있지만, 리스프는 정확한 수치 결과를 자동으로 부정확한 소수로 전환할 수 없기에 일단 소수점을 활용하면, 전체 계산 결과가 소수점 유지하게 될 것입니다 (소수점 연산은 전염됩니다) :</p>
 <pre><code class="language-lisp">
 (float (/ 1 3))
 ;;=&gt; 0.3333333333333333
@@ -234,7 +229,7 @@
             (float (/ 1 10))))
 ;;=&gt; 0.020000000000000004
 
-(+ 1/100 1/100) ; 이전 계산과 비교하세요
+(+ 1/100 1/100) ; 이전 계산과 비교해 보시기 바랍니다
 ;;=&gt; 1/50
 
 (* 3 7 10.0)
@@ -247,17 +242,17 @@
 ;;=&gt; 1.0
 
 (+ 1/3 2/3)
-;;=&gt; 1 ; 이전 계산과 비교하세요
+;;=&gt; 1 ; 이전 계산과 비교해 보시기 바랍니다
 </code></pre>
-<p>리스프는 소수를 소수점과 같이, 정수에는 소수점 없이 출력합니다.</p>
+<p>리스프는 소수를 소수점과 함께, 정수에는 소수점 없이 출력합니다.</p>
 <h2 id="문자는-리스프가-읽고-쓸-수-있는-무언가를-제공합니다"><a class="header" href="#문자는-리스프가-읽고-쓸-수-있는-무언가를-제공합니다">문자는 리스프가 읽고 쓸 수 있는 무언가를 제공합니다.</a></h2>
-<p>기본적으로 리스프 I/O는 문자를 이용합니다. <code>READ</code>와 <code>WRITE</code> 함수는 문자를 리스프 오브젝트로 그리고 역으로 변환시킵니다. <code>READ-CHAR</code>와 <code>WRITE-CHAR</code>는 단일 문자를 읽고 씁니다.</p>
+<p>기본적으로 리스프 I/O(input/output)는 문자를 이용합니다. <code>READ</code>와 <code>WRITE</code> 함수는 문자를 리스프 오브젝트로 그리고 그 반대로 변환시킵니다. <code>READ-CHAR</code>와 <code>WRITE-CHAR</code>는 단일 문자를 읽고 씁니다.</p>
 <pre><code class="language-lisp">(read)
-;;&lt;&lt; a \newline
-;;=&gt; A
+;;&lt;&lt; a ⏎
+;;=&gt; A 
 
 (read)
-;;&lt;&lt; #\a \newline
+;;&lt;&lt; #\a ⏎
 ;;=&gt; a
 
 (read-char)
@@ -279,14 +274,14 @@
 (write-char 'a)
 ;;&gt;| Error: Not a character
 </code></pre>
-<p>위 예에서 새로운 표기를 추가했습니다. <code>;;&lt;&lt;</code> 표시는 <code>READ</code>와 같은 입력함수에 대한 입력을 기다린다는 것을 의미합니다. <code>\newline</code>은 엔터(enter)키에 의해 생성되는 개행문자를 나타냅니다.</p>
+<p>위 예에서 새로운 표기를 추가했습니다. <code>;;&lt;&lt;</code> 표시는 <code>READ</code>와 같은 입력함수에 대한 입력을 기다린다는 것을 의미합니다. <code>⏎</code>은 엔터(enter)키에 의해 생성되는 개행문자를 나타냅니다.</p>
 <p>값을 반환하는 것(<code>;;=&gt;</code>)과 달리 <code>;;&gt;&gt;</code>는 출력을 나타냅니다.</p>
-<p>개행시 <code>read</code>의 입력받는 동작이 종료된다는 것을 알아채셨을 것입니다. <code>READ</code>는 완벽한 리스프 표현식을 구성하고자하는 문자들을 모으기 때문입니다. 레슨 11[p 77]에서 이것에 대해 좀 더 살펴볼 것입니다. 이번 예제에서, <code>READ</code>는 개행으로 종료되는 심볼을 모읍니다. 심볼은 또한 공백, 괄호, 심볼의 일부가 아닌 문자로 종료됩니다.</p>
-<p>대조적으로, <code>READ-CHAR</code>는 입력에서 정확히 하나의 문자만 읽습니다. 문자를 받자마자 <code>READ-CHAR</code>는 실행을 완료하고 문자를 반환합니다.</p>
-<p>몇몇 리스프 시스템은 어떠한 입력을 받아들이기 전에 리턴(return) 키를 누르도록 요구할 것입니다. 이는 일상적인게 아니며, 환경 설정 변수로 변경 할 수 있습니다 - 여러분이 사용하는 리스프의 제조사와 상담을 하시기 바랍니다.</p>
-<p><code>WRITE</code>와 <code>WRITE-CHAR</code>는 둘 다 받은 값을 반환합니다. 값을 출력하는 방식은 다릅니다. <code>WRITE</code>는 값을 출력하므로, 동일한 값을 생성하는 <code>READ</code>로 표현할 수 있습니다. <code>WRITE-CHAR</code>는, 이것이 <code>READ</code>에서의 문자라는 것을 나타내는 추가 리스프 문법 (<code>#\</code>)가 없는, 읽을 수 있는 문자를 출력합니다.</p>
-<p>리스프는 단일 문자를 <code>#\문자</code> 표기법을 이용하여 나타내며, 그러한 문자로는 literal 문자나 출력 가능한 상형문자가 아닌 문자의 이름이 있습니다.</p>
-<div class="table-wrapper"><table><thead><tr><th>Character</th><th>Hex Value</th><th>Lisp</th><th>Standard?</th></tr></thead><tbody>
+<p>개행 시 <code>read</code>의 입력받는 동작이 종료된다는 것을 알아채셨을 것입니다. <code>READ</code>는 문자들을 모아 완벽한 리스프 표현식을 구성하고자 하기 때문입니다. <a href="./lesson_11.html">레슨 11</a>에서 이것에 대해 좀 더 살펴볼 것입니다. 이번 예제에서, <code>READ</code>는 개행으로 종료되는 심볼을 모읍니다. 이 심볼은 또한 공백, 괄호, 혹은 심볼이 될 수 없는 문자일때 종료됩니다.</p>
+<p>대조적으로, <code>READ-CHAR</code>는 입력에서 정확히 하나의 문자만 읽습니다. 문자를 받자마자 <code>READ-CHAR</code>는 실행을 완료하고 해당 문자를 반환합니다.</p>
+<p>몇몇 리스프 시스템은 어떠한 입력을 받아들이기 전에 리턴(return) 키를 누르도록 요구받을 것입니다. 이는 일반적인게 아니며, 환경 설정 변수로 변경 할 수 있을 것입니다 - 여러분이 사용하는 리스프의 제조사와 상담을 하시기 바랍니다.</p>
+<p><code>WRITE</code>와 <code>WRITE-CHAR</code>는 둘 다 받은 값을 반환합니다. 값을 출력하는 방식은 다릅니다. <code>WRITE</code>는 값을 출력하므로, 동일한 값을 생성하는 <code>READ</code>로 표현할 수 있습니다. <code>WRITE-CHAR</code>는 단순히 읽을 수 있는 문자를 출력하며, 이는 <code>READ</code>에서의 문자라는 것을 나타내는 추가 리스프 문법 (<code>#\</code>)을 포함하지 않습니다.</p>
+<p>리스프는 단일 문자를 <code>#\char</code> 표기법을 이용하여 표시하는데, 이러한 <code>char</code>에 들어가는 것으로는 리터럴(literal) 문자이거나 상형문자로 출력 할 수 없는 문자의 이름이 있습니다.</p>
+<div class="table-wrapper"><table><thead><tr><th>문자</th><th>16진수</th><th>Lisp</th><th>표준?</th></tr></thead><tbody>
 <tr><td>space</td><td>20</td><td>#\Space</td><td>yes</td></tr>
 <tr><td>newline</td><td>--</td><td>#\Newline</td><td>yes</td></tr>
 <tr><td>backspace</td><td>08</td><td>#\Backspace</td><td>semi</td></tr>
@@ -297,14 +292,15 @@
 <tr><td>rubout or DEL</td><td>7F</td><td>#\Rubout</td><td>semi</td></tr>
 </tbody></table>
 </div>
-<p><code>#\Space</code>와 <code>#\Newline</code>만이 모든 리스프 시스템에서의 요구사항입니다. ASCII 문자셋를 이용하는 시스템은 아마 위에 나온 나머지 문자코드를 구현할 것입니다. <code>\#Newline</code> 문자는 호스트 시스템에 맞는 출력 라인의 끝을 표시하는 컨벤션(convention)을 따릅니다. 예로:</p>
-<div class="table-wrapper"><table><thead><tr><th>System</th><th>Newline</th><th>Hex Value</th></tr></thead><tbody>
+<p><code>#\Space</code>와 <code>#\Newline</code>만이 모든 리스프 시스템에서의 요구사항 입니다. ASCII 문자셋를 이용하는 시스템은 아마 위에 나온 나머지 문자코드를 구현했을 것입니다.</p>
+<p><code>\#Newline</code> 문자는 호스트 시스템에 맞게 출력 라인의 끝을 표시하는 컨벤션(convention)을 따를것입니다. 예로:</p>
+<div class="table-wrapper"><table><thead><tr><th>시스템</th><th>개행</th><th>16진수</th></tr></thead><tbody>
 <tr><td>Macintosh</td><td>CR</td><td>0D</td></tr>
 <tr><td>MS-DOS</td><td>CR LF</td><td>0D 0A</td></tr>
 <tr><td>Unix</td><td>LF</td><td>0A</td></tr>
 </tbody></table>
 </div>
-<p>94개의 출력가능한 표준 문자들이 <code>\#문자</code>로 표현됩니다:</p>
+<p>94개의 출력 가능한 표준 문자들이 <code>\#char</code>로 표현됩니다:</p>
 <pre><code class="language-txt">  ! &quot; # $ % &amp; ' ( ) * + , - . /
 0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
 @ A B C D E F G H I J K L M N O
@@ -312,8 +308,8 @@ P Q R S T U V W X Y Z [ \ ] ^ _
 ‘ a b c d e f g h i j k l m n o
 p q r s t u v w x y z { | } ~
 </code></pre>
-<h2 id="arrays-organize-data-into-tables"><a class="header" href="#arrays-organize-data-into-tables">Arrays organize data into tables</a></h2>
-<p>여러분이 데이터를 2차원, 3차원 혹은 더 많은 차원의 테이블로 역으려한다면, 배열(array)을 만들 수 있습니다:</p>
+<h2 id="배열은-데이터를-테이블로-정리한다"><a class="header" href="#배열은-데이터를-테이블로-정리한다">배열은 데이터를 테이블로 정리한다.</a></h2>
+<p>여러분이 데이터를 2차원, 3차원 혹은 더 많은 차원의 테이블로 역으려고자 한다면, 배열(array)을 만들 수 있습니다:</p>
 <pre><code class="language-lisp">(setq a1 (make-array '(3 4)))
 ;;=&gt; #2A((NIL NIL NIL NIL)
 ;;       (NIL NIL NIL NIL)
@@ -345,13 +341,13 @@ a1
 (aref a1 0 2)
 ;;=&gt; &quot;hello&quot;
 </code></pre>
-<p>dimensions의 리스트를 취하여 배열을 반환하는 MAKE-ARRAY를 이용하여 배열을 만듭니다. 기본적으로,  배열은 어떠한 종류의 데이터라도 담을 수 있습니다; 효율성을 위해 추가 인자로 데이터형식의 요소를 제한할 수 있습니다.</p>
-<p>배열의 rank는 dimension의 수와 동일합니다. 위 예제에서 저희는 2-차원rank-2 배열을 만들었습니다. 리스프는 <code>#rankA(...)</code>표기법을 이용하여 배열을 출력합니다. 배열의 내용물은, 첫번째 dimension이 최상단 그룹의 요소로 보여지고, 마지막 dimension이 최하단 그룹의 요소로 보여지는, 중첩된 list로 보여집니다.</p>
-<p>여러분의 리스프 시스템은 아마도 여기서 보여졌던것 처럼 라인을 넘기면서 배열을 출력하지 않을 것입니다. 저는 배열의 구조를 강조하기 위해 라인을 넘겼습니다.</p>
-<p>배열의 요소를 받기 위해선, AREF를 이용합니다. AREF의 첫번째 요소는 배열입니다; 나머지 요소는 각 dimension의 index를 지정합니다. index의 수는 배열의 rank와 맞아야만 합니다.</p>
-<p>배열의 요소를 설정하기 위해선, 이 예제에서 보인것 처럼 SETF form내부에서 AREF를 사용합니다. SETF는 SETQ와 유사하지만, SETQ가 값을 심볼에게 할당하고, SETF는 값을 place에 할당합니다. 예제에서 AREF 폼은 배열의 요소의 place를 지정합니다.</p>
+<p><code>MAKE-ARRAY</code>를 사용하여 배열의 차원에 나타내는 리스트를 넘겨 배열을 만들었습니다. 기본적으로, 배열은 어떠한 종류의 데이터라도 담을 수 있습니다; 성능을 위해 데이터 타입을 추가 인자로 넣어 제한 할 수도 있습니다.</p>
+<p>배열의 랭크(rank)는 차원(dimension)과 동일합니다. 위 예제에서 저희는 2차원 배열을 만들었습니다. 리스프는 <code>#rankA(...)</code>표기법을 이용하여 배열을 출력합니다. 배열의 내용물은, 첫번째 차원이 최상단 그룹의 요소로 보여지고, 마지막 차원이 최하단 그룹의 요소로 보여지는, 중첩된 리스트 표시됩니다.</p>
+<p>여러분의 리스프 시스템은 아마도 여기서 보여졌던것 처럼 라인을 넘기면서 배열을 출력하지 않을 수 도 있습니다. 여기서는 배열의 구조를 강조하기 위해 라인을 넘기면서 표시하였습니다.</p>
+<p><code>AREF</code>를 이용하여 배열의 요소를 얻습니다. <code>AREF</code>의 첫번째 인수는 배열입니다; 나머지 인수로 각 차원의 인덱스(index)를 지정합니다. 인덱스는 배열의 랭크와 맞아야만 합니다.</p>
+<p>배열의 요소를 설정하기 위해선, 이 예제에서 보인것 처럼 <code>SETF</code> 폼 내부에서 <code>AREF</code>를 사용합니다. <code>SETF</code>는 <code>SETQ</code>와 유사하지만, <code>SETQ</code>는 심볼에게 값을 할당하고, <code>SETF</code>는 위치에 값을 할당합니다. 예제에서 <code>AREF</code> 폼은 배열의 요소로 위치를 지정했습니다.</p>
 <h2 id="백터는-일차원-배열"><a class="header" href="#백터는-일차원-배열">백터는 일차원 배열</a></h2>
-<p>Vector는 일-차원one-dimensional 배열입니다. MAKE-ARRAY를 이용하여 벡터를 만들 수 있으며, AREF를 이용하여 이의 요소에 접근 할 수 있습니다.</p>
+<p>백터(Vector)는 일차원 배열입니다. <code>MAKE-ARRAY</code>를 이용하여 벡터를 만들 수 있으며, <code>AREF</code>를 이용해 요소에 접근 할 수 있습니다.</p>
 <pre><code class="language-lisp">(setq v1 (make-array '(3)))
 ;;=&gt; #(NIL NIL NIL)
 
@@ -369,16 +365,15 @@ a1
 
 v1
 ;;=&gt; #(:ZERO :ONE NIL)
-
-
-;; 리스프는 #1A(...)이 아닌 조금 간소화된 form #(...)을 이용하여 벡터를 출력합니다.
-;; MAKE-ARRAY에서 단일-원소 리스트나 벡터의 차원dimenion을 지정할 수 있습니다.
-;; VECTOR 폼을 이용하여 값을 나열하여 벡터를 만들 수 있습니다:
-(vector 34 22 30)
+</code></pre>
+<p>리스프는 <code>#1A(...)</code>이 아닌 조금 간소화된 <code>#(...)</code> 폼을 이용하여 벡터를 출력합니다.</p>
+<p>단일 원소 리스트나 벡터의 차원을 지정한 <code>MAKE-ARRAY</code> 중 선택할 수 있습니다.</p>
+<p><code>VECTOR</code> 폼에 값들을 나열하여 벡터를 만들 수 있습니다:</p>
+<pre><code class="language-lisp">(vector 34 22 30)
 ;;=&gt; #(34 22 30)
 </code></pre>
-<p>결과값이 list가 아닌 vector라는 점을 제외하면, 이는 LIST form과 유사합니다. list와 vector간에는 또 다른 닮음이 있습니다: 모두 sequence입니다. sequence는 13장[p 150]에서 보게될 함수에 의해 다뤄집니다.</p>
-<p>벡터의 요소에 접근하기 위해 AREF를 이용하거나, sequence-특화 함수 ELT를 이용할 수 있습니다:</p>
+<p>결과값이 리스트가 아닌 벡터라는 점을 제외하면, 이는 <code>LIST</code> 폼과 유사합니다. 리스트와 벡터 사이에는 닮은게 하나 더 있습니다: 둘 다 시퀀스(sequence)입니다. 13장[p 150]에서 만나게 될 함수들로 시퀀스를 조작할 수 있습니다.</p>
+<p>벡터의 요소에 접근하기 위해 <code>AREF</code>를 사용하거나, 시퀀스에 특화된 함수 <code>ELT</code>를 사용할 수 있습니다:</p>
 <pre><code class="language-lisp">(setf v2 (vector 34 22 30 99 66 77))
 ;;=&gt; #(34 22 30 99 66 77)
 
@@ -389,7 +384,7 @@ v2
 ;;=&gt; #(34 22 30 :RADIO 66 77)
 </code></pre>
 <h2 id="문자열은-문자를-담고있는-백터"><a class="header" href="#문자열은-문자를-담고있는-백터">문자열은 문자를 담고있는 백터</a></h2>
-<p>여러분은 이미 &quot;...&quot;를 이용한 문자열(string) 작성하는 법을 알고 있습니다. 문자열은 벡터이기에, 문자열의 요소에 접근하기 위해 배열과 백터 함수를 적용할 수 있습니다. 또한 <code>make-string</code> 함수를 이용하여 문자열을 만들거나, <code>string</code> 함수를 이용하여 문자나 심볼을 문자열로 바꿀 수 있습니다.</p>
+<p>여러분은 이미 <code>&quot;...&quot;</code>를 이용하여 문자열(string)을 작성하는 법을 알고 있습니다. 문자열은 벡터이기에, 문자열의 요소에 접근하기 위해 배열과 백터의 함수들을 적용할 수 있습니다. 또한 <code>make-string</code> 함수를 이용하여 문자열을 만들거나, <code>string</code> 함수를 이용하여 문자나 심볼을 문자열로 바꿀 수 있습니다.</p>
 <pre><code class="language-lisp">(setq s1 &quot;hello, there.&quot;)
 ;;=&gt; &quot;hello, there.&quot;
 
@@ -408,9 +403,9 @@ s1
 (string #\G)
 ;;=&gt; &quot;G&quot;
 </code></pre>
-<h2 id="symbols-are-unique-but-they-have-many-values"><a class="header" href="#symbols-are-unique-but-they-have-many-values">Symbols are unique, but they have many values</a></h2>
-<p>레슨 5에서 심볼은 고유한 독자성(identity)을 지닌다고 보았지만, 이는 반복성을 지닙니다: 심볼은 같은 철자의 다른 심볼과 동일합니다(이번 레슨 끝부분에서 좀더 배우게될 패키지 designation를 포함하여). 이는 리스프로 하여금 프로그램이나 데이터를 읽어올 수 있게 만들 수 있다는 것을 의미하며, 같은 철자로 나타낸 모든 심볼은 동일한 심볼입니다. 리스프가 이를 수행하는 매커니즘을 제공하기에, 심볼릭 정보를 다루는 프로그램을 작성하는 것에 대한 걱정을 하나 덜게되었습니다.</p>
-<p>저희는 또한 레슨 5에서 심볼은 변수와 함수, 그리고 문서, 출력 이름, 프로퍼티(properties)를 위한 값을 가질 수 있다고 배웠습니다. 심볼의 프로퍼티 리스트(property list)는 다수의 키/값 쌍이 심볼과 연결된 아주 작은 데이터베이스와 같습니다. 예를들어, 여러분의 프로그램이 오브젝트를 표현하고 다룬다면, 오브젝트에 관한 정보를 프로퍼티 리스트에 저장할 수 있습니다:</p>
+<h2 id="심볼은-유니크하지만-여러개의-값을-가진다"><a class="header" href="#심볼은-유니크하지만-여러개의-값을-가진다">심볼은 유니크하지만, 여러개의 값을 가진다.</a></h2>
+<p>이미 <a href="./lesson_05.html">레슨 5</a>에서 심볼은 고유한 동일성(identity)을 지닌다고 했는데, 반복해 설명할 필요가 있습니다: 심볼은 철자가 같은 다른 심볼과 동일합니다(이번 레슨 끝부분에서 좀 더 배우게 될 패키지 지정(designation)에 포함된). 이는 리스프로 하여금 프로그램이나 데이터를 읽을 수 있도록 만들어 주며, 철자가 같은 심볼은 모두 동일한 심볼입니다. 리스프가 이를 위한 매커니즘을 제공하기에, 심볼 정보를 다루는 프로그램을 작성하는 것에 대한 걱정을 하나 덜게 되었습니다.</p>
+<p>저희는 또한 <a href="./lesson_05.html">레슨 5</a>에서 심볼은 변수와 함수, 그리고 문서, 출력 이름, 프로퍼티(properties)를 위한 값을 가질 수 있다고 배웠습니다. 심볼의 프로퍼티 리스트(property list)는 다수의 키/값 쌍이 심볼과 연결된 아주 작은 데이터베이스와 같습니다. 예를들어, 여러분의 프로그램이 오브젝트를 표현하고 다루고자 한다면, 오브젝트에 관한 정보를 프로퍼티 리스트에 저장할 수 있습니다:</p>
 <pre><code class="language-lisp">(setf (get 'object-1 'color) 'red)
 ;;=&gt; RED
 
@@ -435,11 +430,11 @@ s1
 object-1
 ;;&gt;| Error: no value
 </code></pre>
-<p><code>OBJECT-1</code>은 값을 갖지 않는다는 점을 주목하시기 바랍니다 - 모든 유용한 정보는 두 곳에 있습니다: 심볼의 identify와 심볼의 프로퍼티.</p>
-<p>이러한 프로퍼티의 이용은 현대의 오브젝트 프로그래밍보다 몇 십년이나 앞서 나왔습니다. 이는 오브젝트의 필수적인 3가지 매커니즘중 2가지를 제공합니다: 식별자identify와 캡슐화encapsulation (property 값 역시 함수가 될 수 있다는 것을 명심하시기 바랍니다). 3번째 매커니즘, 상속(inheritance)은 다른 &quot;object&quot;를 link하여 simulate합니다.</p>
-<p>프로퍼티는 오늘날의 리스프 프로그램에서 거의 사용되지 않습니다. 해쉬테이블(Hashtables) (아래 참조) [p 73] , (다음 section에서 기술된) 구조체(structures), CLOS 오브젝트(7장 [p 117]과 14장 [p 157] 참조)는 사용하기 더 편리하며 더욱 효율적인 방식으로 프로퍼티 리스트의 모든 기능을 제공합니다. 현대 리스프 개발 시스템은 프로퍼티 파일과 심볼을 정의하는 폼의 파일 위치, 함수의 인자 리스트의 정의와 같은 (프로그래밍 환경에서 유용한 도구로 이용하기 위한) 특정 정보를 기록하여 프로그램에 주석을 다는 목적으로 주로 사용합니다.</p>
-<h2 id="structures-let-you-store-related-data"><a class="header" href="#structures-let-you-store-related-data">Structures let you store related data</a></h2>
-<p>리스프 구조체는, 명명된 슬롯(slot)과 관계된 데이터를 저장하는, 오브젝트를 생성하는 방법을 여러분에게 제시합니다.</p>
+<p><code>OBJECT-1</code>은 값을 갖지 않는다는 점을 주목하시기 바랍니다 - 중요한 것은 바로 이 두 부분입니다: 심볼의 동일성과 심볼의 프로퍼티.</p>
+<p>이러한 프로퍼티의 이용은 현대의 객체 지향 프로그래밍보다 몇 십년이나 앞서 나왔습니다. 이는 오브젝트의 필수적인 3가지 매커니즘 중 2가지를 제공합니다: 동일성(identify)과 캡슐화(encapsulation) (프로퍼퍼티의 값 역시 함수가 될 수 있다는 점을 명심하시기 바랍니다). 3번째 매커니즘 상속(inheritance)은 다른 &quot;오브젝트&quot;를 연결하여 시뮬레이션합니다.</p>
+<p>오늘날의 리스프 프로그램에서는 프로퍼티는 거의 사용되지 않습니다. 해쉬테이블(Hashtables) (아래 참조) [p 73] , (다음 단락에서 기술된) 구조체(structures), CLOS 오브젝트(7장 [p 117]과 14장 [p 157] 참조)는 사용하기 더 편리하며 더욱 효율적인 방식으로 프로퍼티 리스트의 모든 기능을 제공합니다. 현대 리스프의 개발에선 프로퍼티 파일과 심볼을 정의하는 폼의 파일 위치, 함수의 인자 리스트의 정의와 같은 (프로그래밍 환경에서 유용한 도구로 이용하기 위한) 특정 정보를 프로그램에 주석으로써 기록하는 목적으로 주로 사용합니다.</p>
+<h2 id="구조체는-연관된-데이터들을-모아-저장할-수-있다"><a class="header" href="#구조체는-연관된-데이터들을-모아-저장할-수-있다">구조체는 연관된 데이터들을 모아 저장할 수 있다.</a></h2>
+<p>리스프 구조체는 명명된 슬롯(slot)과 관계된 데이터를 저장하는 오브젝트를 생성하는 방법을 제공해 줍니다.</p>
 <pre><code class="language-lisp">(defstruct struct-1
   color
   size
@@ -471,10 +466,10 @@ object-1
 (struct-1-position object-2)
 ;;=&gt; (UNDER-TABLE)
 </code></pre>
-<p>이 예에서, 저희는 <code>COLOR</code>, <code>SHAPE</code>, <code>SIZE</code>, <code>WEIGHT</code> 슬롯을 지닌 <code>STRUCT-1</code> 구조체를 정의하였습니다. 그런 다음 <code>STRUCT-1</code>의 인스턴스(instance)를 만들고, 해당 인스턴스를 변수 <code>OBJECT-2</code>에 할당하였습니다. 예제의 나머지 부분은, struct-slot 이름으로된 접근자(assessor) 함수를 이용하여, 어떻게 구조체 인스턴스의 슬롯에 접근하는지를 보여줍니다. 리스프는 <code>DEFSTRUCT</code>를 이용하여 구조체를 정의할때 <code>make-structname</code>과 structname-slotname 함수를 생성합니다.</p>
+<p>이 예에서, 우리는 <code>COLOR</code>, <code>SHAPE</code>, <code>SIZE</code>, <code>WEIGHT</code> 슬롯을 지닌 <code>STRUCT-1</code> 구조체를 정의하였습니다. 그런 다음 <code>STRUCT-1</code>의 인스턴스(instance)를 만들고, 해당 인스턴스를 변수 <code>OBJECT-2</code>에 할당하였습니다. 예제의 나머지 부분은, 구조체의 타입과 슬롯 이름으로 구성된 접근자(assessor)함수를 이용하여, 어떻게 구조체 인스턴스의 슬롯에 접근할 수 있는지 보여주고 있습니다. <code>DEFSTRUCT</code>를 이용하여 구조체를 정의하면 리스프는 <code>make-구조체명</code>과 <code>구조체명-슬롯명</code> 함수도 만들어 줍니다.</p>
 <p>6장[p 112]에서 <code>DEFSTRUCT</code>의 optional 기능에 대해 살펴볼 것입니다.</p>
-<h2 id="type-information-is-apparent-at-runtime"><a class="header" href="#type-information-is-apparent-at-runtime">Type information is apparent at runtime</a></h2>
-<p>심볼은 런타임시 어떠한 변수 타입과도 연관지을 수 있습니다. 이것이 문제되는 경우에 대해, 리스프는 저희에게 값의 타입을 묻는것을 허용합니다</p>
+<h2 id="타입-정보를-런타임에-알-수-있다"><a class="header" href="#타입-정보를-런타임에-알-수-있다">타입 정보를 런타임에 알 수 있다.</a></h2>
+<p>심볼은 런타임시 어떠한 변수 타입과도 연관지을 수 있습니다. 문제가 있는 경우, 리스프는 해당 값의 타입을 질의할 수 있는 방법을 제공합니다:</p>
 <pre><code class="language-lisp">(type-of 123)
 ;;=&gt; FIXNUM
 
@@ -490,10 +485,10 @@ object-1
 (type-of '(a b c))
 ;;=&gt; CONS
 </code></pre>
-<p><code>TYPE-OF</code> 는 인자의 타입을 나타내는 심볼이나 리스트를 반환합니다. 게다가 이 정보는 인자의 종류의 기반하는 프로그램의 행동을 설명하는데 이용할 수 있습니다. <code>TYPECASE</code> 함수는 타입에 대한 질의(inquiry)와 COND-와같은 분기(dispatch)를 결합한 것입니다.</p>
-<p>CLOS(14장 [p 157] 참조)S의 제네릭 함수의 도입으로, <code>TYPE-OF</code>는 예전만큼 중요하지는 않습니다.</p>
-<h2 id="hash-tables-provide-quick-data-access-from-a-lookup-key"><a class="header" href="#hash-tables-provide-quick-data-access-from-a-lookup-key">Hash Tables provide quick data access from a lookup key</a></h2>
-<p>해쉬 테이블은 값과 유니크 키(유일 키, unique key)와 관련있습니다. 프로퍼티 리스트완 다르게, 해쉬 테이블은 엄청나게 많은 키/값쌍에 매우 적합하지만, 작은 연관 set에 대해 엄청난 오버헤드(overhead)를 감수해야합니다.</p>
+<p><code>TYPE-OF</code> 는 인수의 타입을 나타내는 심볼 혹은 리스트를 반환합니다. 게다가 이 정보를 이용하여 인자의 타입에 기반한 프로그램의 동작 방식을 조정 할 수 있습니다. <code>TYPECASE</code> 함수는 타입에 대한 질의(inquiry)와 COND-와 같은 분기(dispatch)를 결합한 것입니다.</p>
+<p>CLOS(14장 [p 157] 참조)의 제네릭 함수의 도입으로, <code>TYPE-OF</code>는 예전만큼 중요하지는 않습니다.</p>
+<h2 id="해쉬-테이블은-룩업키로-빠르게-데이터에-접근-할-수-있다"><a class="header" href="#해쉬-테이블은-룩업키로-빠르게-데이터에-접근-할-수-있다">해쉬 테이블은 룩업키로 빠르게 데이터에 접근 할 수 있다.</a></h2>
+<p>해쉬 테이블은 유니크 키(유일 키, unique key)와 값의 연결로 이루어져 있습니다. 프로퍼티 리스트완 다르게, 해쉬 테이블은 수 많은 키/값 쌍에 적합하며, 적은 수의 연결 집합에 대해서는 과도한 오버헤드(overhead)가 발생합니다.</p>
 <pre><code class="language-lisp">(setq ht1 (make-hash-table))
 ;;=&gt; #&lt;HASH-TABLE&gt;
 
@@ -515,23 +510,22 @@ object-1
 ;;=&gt; NIL
 ;;=&gt; T
 </code></pre>
-<p><code>MAKE-HASH-TABLE</code>을 이용하여 해쉬 테이블을 생성하며, <code>GETHASH</code>를 이용하여 값에 접근합니다. <code>GETHASH</code>는 두개의 값을 반환합니다. 첫번째는 키와 관련있는 값입니다. 두번째는 키를 찾으면 <code>T</code>, 아니면 <code>NIL</code>입니다. 위 예제에서 처음과 마지막 <code>GETHASH</code>폼의 차이를 주목하시기 바랍니다.</p>
-<p>기본적으로, 해쉬테이블은 <code>EQ</code>(이는 숫자나 리스트가 아닌 심볼에 대해서만 동작합니다)를 이용하여 이의 키를 비교하기 위해 만들어졌습니다. 17장[p 174]에서 동일성 판단(equality predicates)에 대해 더 자세히 배울 것입니다. 지금은, 다수의 키를 이용하고자 한다면, 이 폼을 이용하여 해쉬테이블을 만들어야한다는 것을 명심하시기 바랍니다:</p>
+<p><code>MAKE-HASH-TABLE</code>을 이용하여 해쉬 테이블을 만들었으며, <code>GETHASH</code>를 이용하여 값에 접근하였습니다. <code>GETHASH</code>는 두개의 값을 반환합니다. 첫번째는 해당 키와 연결된 값입니다. 두번째는 키를 찾으면 <code>T</code>, 아니면 <code>NIL</code>입니다. 위 예제에서 <code>GETHASH</code>폼의 처음과 마지막 차이를 주목하시기 바랍니다.</p>
+<p>해쉬테이블은 기본적으로 <code>EQ</code>(이는 숫자나 리스트가 아닌 심볼에 대해서만 동작합니다)를 이용하여 키를 비교하도록 만들어졌습니다. 17장[p 174]에서 동등성 판단(equality predicates)에 대해 더 자세히 배울 것입니다. 지금은 키에 숫자를 사용하려면 다음과 같은 형식을 사용하여 해시 테이블을 만들어야 한다는 점만 명심하시기 바랍니다:</p>
 <pre><code class="language-lisp">(make-hash-table :test #'eql)
 </code></pre>
 <p>리스트를 키로 사용하고자 한다면, 이렇게 해쉬테이블을 만듭니다:</p>
 <pre><code class="language-lisp">(make-hash-table :test #'equal)
 </code></pre>
-<p>키를 없애고자한다면, <code>(REMHASH key hash-table)</code>폼을 이용합니다. 그리고 키에 해당하는 값을 바꾸고자한다면, 키/값쌍을 추가했던것처럼 <code>GETHASH</code>와 <code>SETF</code>를 이용합니다.</p>
-<h2 id="packages-keep-names-from-colliding"><a class="header" href="#packages-keep-names-from-colliding">Packages keep names from colliding</a></h2>
-<p>프로그램을 작성하는것에 관한 어려운 일중 하나는 프로그램의 이름을 짓는 부분입니다. 한편으론, 기억하기 쉽고 명명된 object의 규칙과 목적을 환기evocative시켜주는 이름을 이용하기 원할 것입니다. 다른 한편으론, 언젠가 여러분의 프로그램과 작업하게될, 다른 프로그램의 어딘가에 이미 사용한 (혹은 사용될 것 같은)이름을 이용하지 않길 원할 것입니다.</p>
-<p>이름 충돌(naming conflict)을 피하는 법 중 하나는 프로그램에 있는 모든 이름에 누구도 사용하지 않는 고유 접두사(prefix)를 붙이는 것입니다. 여러분은 이것이 라이브러리에 매번 필요하다고 생각할 것입니다 - 보통 하나에서 세개정도 문자의 접두사가 있다. 불행히도, 여전히 두 소프트웨어 개발자가 동일한 prefix를 선택하기 위한 많은 관문이 남아있습니다; 유달히 몇몇 prefix들이 다른 것보다 더욱 evocative하기 때문입니다. 여러분이 생산한 모든 소프트웨어를 제어하고자 한다면, 모든 prefix를 선택하고 문제를 피할 수 있습니다. prefix naming scheme을 이용하는 third-parfy 소프트웨어를 사고자 한다면, 제조사에 의해 선택된 이름에 관련된 일을 해야할 것이며, 두 제조사가 우연히 동일한 prefix를 사용하지 않기를 희망할 것입니다.</p>
-<p><img src="../res/prefixed-names..gif" alt="prefixed-names.gif" /></p>
-<p>이름 충돌을 피하는 또 하나의 방법은 qualified name을 이용하는 것입니다. 이를 하기 위해선, 언어가 프로그래머에 의해 정의되고 제어되는 분리된 이름공간의 지원을 제공해야 합니다. 어떻게 이것이 동작하는지 이해하기 위해, 프로그램을 위해 여러분이 만든 모든 이름이 여러분의 이름이 타이틀 상단에 쓰여진 한장에 종이에 작성되었다고 상상해보시기 바랍니다. 이름이 이용하기에 안전한지 확인하기 위해선, 여러분이 이 페이지에 작성한 이름 목록을 확인하기만 하면 됩니다. 누군가의 소프트웨어가 여러분의 프로그램의 서비스를 필요로 할때, 그것은 여러분의 qualifier와 name을 이용하여 여러분의 이름을 참조합니다. 다른이의 소프트웨어는 다른 qualifier를 지니고 그들의 qualifier는 그들만의 name을 암시하기에(이것을 작성할 필요는 없습니다), 이름 충돌을 피할 방도가 없습니다.</p>
-<p>여러분은 qualifier는 이름에 prefix를 붙이기 위한 복잡한 방법에 지나지 않는다고 생각할 것입니다. 그러나, 거기엔 미묘하며 중대한 차이점이 있습니다. prefix는 이름의 일부입니다; 이는 한번 작성되면 바뀔 수 없습니다. qualifier는 이가 qualify한 이름에서 분리되었으며, 정확히 한 장소에서 &quot;작성&quot;되었습니다. 더욱이, 여러분은 이름들이 쓰여진 &quot;종이&quot;를 가리켜 이를 &quot;그러한 이름들&quot;이라 말할 수 있습니다. 다른 프로그래머와 동일한 qualifier를 선택하게 된다면, 여러분은 여전히 여러분이 선택한 qualifier에 의해 &quot;그 이름&quot;을 참조할 수 있습니다 - 다른 말로 하자면, 여러분이 사용할 소프트웨어가 출고된 후에도, 여러분은 qualifier를 바꿀 수 있습니다.</p>
+<p>키를 없애고자 한다면 <code>(REMHASH key hash-table)</code>폼을 이용합니다. 그리고 키에 해당하는 값을 바꾸고자한다면, 키/값 쌍을 추가했던 것처럼 <code>GETHASH</code>와 <code>SETF</code>를 이용합니다.</p>
+<h2 id="패키지로-이름-충돌을-방지할-수-있다"><a class="header" href="#패키지로-이름-충돌을-방지할-수-있다">패키지로 이름 충돌을 방지할 수 있다.</a></h2>
+<p>프로그램을 작성시 어려운 점 중 하나는 이름 짓는 것입니다. 한편으론, 기억하기 쉽고 해당 객체의 역할이나 목적을 떠올릴 수 있는 이름을 사용하기 원할 것입니다. 그리고 다른 한편으론, 다른 프로그램의 어딘가에 이미 사용한 (혹은 사용될 것 같은)이름을 여러분의 프로그램에서 사용하고 싶진 않을 것입니다.</p>
+<p>이름 충돌(naming conflict)을 피하는 법 중 하나는 프로그램에 있는 모든 이름에 누구도 사용하지 않는 고유 접두사(prefix)를 붙이는 것입니다. 라이브러리에서 이러한 방식을 자주 볼 수 있습니다 - 보통 1~3자로 접두사를 붙입니다. 불행히도, 여전히 두 소프트웨어 개발자가 동일한 접두사를 선택할 수 있는 관문이 남아있습니다; 일부 접두사가 다른 접두사들보다 더 매력적인 경우. 모든 소프트웨어를 제어할 수 있다면, 모든 접두사를 선택하여 문제를 피할 수 있습니다. 타사 소프트웨어를 구입하는 경우, 제조사에 의해 선택된 이름을 사용해야만 하며, 동일한 접두사를 사용하지 않기를 바래야만 할 것입니다.</p>
+<p><img src="../res/prefixed-names.gif" alt="prefixed-names.gif" /></p>
+<p>이름 충돌을 피하는 또 하나의 방법은 한정된 이름(qualified name)을 사용하는 것입니다. 이를 위해, 언어는 프로그래머에 의해 정의되고 제어되는 분리된 이름공간을 제공해야 합니다. 어떻게 이것이 동작하는지 이해하기 위해, 프로그램에 쓰이는 모든 이름이 한장에 종이 상단의 타이틀 부분에 작성되었다고 상상해보시기 바랍니다. 이름을 사용해도 안전한지 확인하려면, 이 페이지에 작성한 이름 목록을 확인하기만 하면 됩니다. 누군가의 소프트웨어가 여러분의 프로그램의 서비스를 필요로 할 때, 그 누군가는 여러분들이 한정한 이름을 참조할 것입니다. 다른이의 소프트웨어는 그들만의 규칙이 이름을 한정할 것이며 있을 것이며, 이름 충돌이 발생할 가능성이 없습니다.</p>
+<p>한정자는 이름에 접두사를 추가하는 복잡한 방법에 지나지 않는다고 생각할 수 있습니다. 그러나, 거기엔 미묘하며 중대한 차이점이 있습니다. 접두사는 이름의 일부이므로 한 번 쓰면 변경할 수 없습니다. 한정자는 한정하는 이름과 분리되어 있으며 정확히 한 곳에 &quot;기록&quot;되었습니다. 더욱이, 이름이 적혀 있는 &quot;종이&quot;를 가리키며 &quot;이러한 이름들&quot;이라고 지칭할 수 있습니다. 다른 프로그래머와 동일한 한정자를 선택한 경우에도, 자신이 선택한 한정자로 &quot;그 이름들&quot;을 지칭할 수 있습니다 - 다른 말로 하자면, 여러분이 사용할 소프트웨어가 출고된 후에도, 한정자를 변경할 수 있습니다.</p>
 <p><img src="../res/rename-package.gif" alt="rename-package.gif" /></p>
-<p>위 예제에는, 파일 LIB1과 LIB2에서 가져온 두 라이브러리가 있습니다. 두 라이브러리 설계자는, 리스프에서 패키지 이름으로 알려진, 이름 공간namespace을 위해 UTIL이란 이름을 사용하였습니다. 각 라이브러리는 client에게 보여지는 이름들을 나열했습니다. 두 라이브러리를 이용하는 프로그래머는 <code>MY-PACKAGE</code>란 패키지 이름에서 코드를 작성합니다. 각 라이브러리를 로드한후, 프로그래머는 이의 package의 이름을 다른 이름으로 바꿉니다. 그러면, <code>UTIL-1:INITIALIZE</code>와 <code>UTIL-2:INITIALIZE</code>의 호출에서 봤던 것처럼, 라이브러리에 있는 이름들은 이름이 바뀐 qualifier를 이용하여 참조됩니다. 프로그래머는 여전히 qualify 폼이 아닌 INITIALIZE 이름은 이용할 수 있다는 것을 주목하시기 바랍니다 - 이는 <code>MY-PACKAGE:INITIALIZE</code>와 동일합니다.</p>
-<p>리스프는 package facility라 알려진 함수와 매크로를 통해 이러한 기능을 제공합니다. <code>DEFPACKAGE</code> 매크로는 간편하게 대부분의 패키지 연산을 제공하는데 반해, <code>IN-PACKAGE</code> 매크로는 현재 패키지를 설정합니다:</p>
+<p>위 예로 두 라이브러리 <code>LIB1</code>와 <code>LIB2</code>가 있습니다. 두 라이브러리를 설계한 사람은 리스프에서 패키지 이름으로 알려진 이름 공간(namespace)을 <code>UTIL</code>이라 이름 붙였습니다. 각 라이브러리는 클라이언트에 노출될 이름들이 나열되어 있습니다. 두 라이브러리를 이용하는 프로그래머는 <code>MY-PACKAGE</code>란 패키지 이름에서 코드를 작성했습니다. 각 라이브러리를 로드한 후, 이름들을 구분할 수 있도록 프로그래머는 이의 패키지 이름을 바꾸었습니다. 그러면, <code>UTIL-1:INITIALIZE</code>와 <code>UTIL-2:INITIALIZE</code>의 호출에서 봤던 것처럼, 라이브러리에 있는 이름들은 이름이 바뀐 한정자를 활용하여 참조됩니다. 프로그래머는 한정자가 없는 <code>INITIALIZE</code>란 이름을 여전히 사용 할 수 있다는 점을 주목하시기 바랍니다 - 이는 <code>MY-PACKAGE:INITIALIZE</code>와 동일합니다.</p>
 <pre><code class="language-lisp">;;;; file: util1.lisp
 (defpackage util1
   (:export init func1 func2)
@@ -567,10 +561,10 @@ object-1
 (func1)
 (func2)
 </code></pre>
-<p>예제는 세개의 파일의 내용물을 나열했습니다. File 1과 File 2는 모두 동일한 이름으로 3개의 함수를 정의하였습니다. File 1은 이름을 UTIL1 package에 넣었으며, File 2는 UTIL2 package를 이용합니다. <code>defpackage</code> 폼은 package의 이름을 지어줍니다. <code>:use</code> 옵션은 다른 pakcage에서 qualification없이 사용될 이름을 지정하는 반면, :EXPORT 옵션은 package에서 client에게 노출될 이름을 지정합니다.</p>
-<p><code>defpackage</code> 폼은 단지 pakcage를 생성합니다. <code>use-package</code> 폼은 package를 current로 만듭니다 -  qualify가 되지 않은 모든 이름들은 current입니다. COMMON-LISP:<em>PACKAGE</em> 변수는 항상 current package를 포함합니다.</p>
-<p>File 3은 CLIENT package를 만듭니다. :INFORT-FROM 옵션은 UTIL1과 UTIL2 package로부터 특정 이름을 가져옵니다 - 이러한 이름들은 CLIENT package에서 qualification 없이 사용되어집니다. UTIL1나 UTIL2에서 export되었지만 CLIENT에서 import된 이름들은, form pakcage:name 의 명시적explicit qualifier를 이용하여 CLIENT에 의해 참조될 수 있습니다.</p>
-<p>이번 section에선 아주 기초적인 package 연산만을 다루었습니다. 31장[p 247]에서, 큰 규모의 소프트웨어 시스템을 구성에서의 package를 살펴볼때, 좀더 세부적인걸 다룰 것입니다.</p>
+<p>예제는 세개의 파일의 내용물을 나열했습니다. <code>util1.lisp</code>와 <code>util2.lisp</code>는 모두 동일한 이름으로 3개의 함수를 정의하였습니다. <code>util1.lisp</code>는 이름들을 <code>UTIL1</code>패키지에 넣었으며, <code>util2.lisp</code>는 <code>UTIL2</code>패키지를 이용합니다. <code>defpackage</code> 폼은 패키지의 이름을 정의합니다. <code>:use</code> 옵션은 한정자 없이 이름을 가져올 패키지명을 지정하며, <code>:EXPORT</code> 옵션은 패키지에서 다른 클라이언트들에게 노출될 이름들을 지정합니다.</p>
+<p><code>defpackage</code> 폼은 단지 패키지를 생성합니다. <code>use-package</code> 폼은 패키지를 현재 사용 중인 패키지로 만듭니다 -  한정하지 않은 모든 이름들은 현재 패키지에 포함됩니다. <code>COMMON-LISP:*PACKAGE*</code> 변수는 항상 현재 이용중인 패키지를 포함합니다.</p>
+<p><code>client.lisp</code>은 <code>CLIENT</code> 패키지를 만듭니다. <code>:INFORT-FROM</code> 옵션은 <code>UTIL1</code>과 <code>UTIL2</code>패키지로부터 특정 이름들을 가져옵니다 - 여기서 가져온 이름들은 <code>CLIENT</code>패키지에서 한정자 없이 사용할 수 있습니다. <code>UTIL1</code>나 <code>UTIL2</code>에서 익스포트(export)하고, <code>CLIENT</code>에서 임포트(import)가 되지 않은 이름들은, <code>pakcage:name</code> 폼과 같이 명시적 한정자(explicit qualifier)를 이용하여 <code>CLIENT</code>에서 참조하여 사용할 수 있습니다.</p>
+<p>이번 단락에선 아주 기초적인 패키지 연산만을 다루었습니다. 31장[p 247]에서, 더 큰 규모의 소프트웨어 시스템을 구축하면서 패키지의 좀 더 자세한 내용을 다룰 것입니다.</p>
 <h2 id="짚고-넘어가기"><a class="header" href="#짚고-넘어가기">짚고 넘어가기</a></h2>
 <ul>
 <li><code>read</code></li>
