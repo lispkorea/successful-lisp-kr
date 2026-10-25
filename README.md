@@ -22,3 +22,8 @@
 ``` zsh
 $ mdbook serve
 ```
+
+## etc
+
+- 바른한글 https://nara-speller.co.kr/speller/
+  - ‘바른한글’은 ‘한국어 맞춤법/문법 검사기’의 새 이름입니다.
