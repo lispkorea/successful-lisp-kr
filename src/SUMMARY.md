@@ -1,6 +1,7 @@
 # Summary
 
 - [들어가며](./Index.md)
+- [목차](./table_of_contents.md)
 - [저자에 대하여](./about_the_author.md)
 - [이 책에 대하여](./about_this_book.md)
 - [헌사](./dediction.md)
@@ -9,6 +10,8 @@
 - [감사의 말](./acknowledgments.md)
 - [서문](./foreword.md)
 - [소개](./introduction.md)
+
+- [01장. 궂이 왜? 혹은, 반론에 대한 답변](./ch01/ch01.md)
 
 # 03장. 12개의 레슨으로 배우는 필수 리스프
 
