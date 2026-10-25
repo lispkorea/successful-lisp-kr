@@ -34,10 +34,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1bda395b.js";
+            window.path_to_searchindex_js = "../searchindex-7d63337c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-6d2cb23d.js"></script>
+        <script src="../toc-c9dc0776.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -183,6 +183,20 @@
 <p>이번 장은 여러분에게 리스프를 시작하기에 앞서 알아야 할 모든 것을 가르칠 것입니다.</p>
 <p>언어의 코어 기능들을 모두 다룰 것입니다. 여러분이 이 코어를 리스프 자체라 생각하고, 그렇지 않은 것은 하나의 거대한 표준 라이브러리라 생각하셨으면 합니다. 책을 읽은 후 이를 배경으로, <code>Common Lisp : The Language, 2nd Edition</code>과 같은 메뉴얼을 참조하면, 더욱 편하게 리스프의 남은 부분들을 배울 수 있을 것입니다.</p>
 <p>여러분은 이번 장을 한번에 쭉 읽어야 합니다. 이따금 다음 단락이나 다음 장에대해 언급하겠지만, 이번장을 이해하기 위해서 반드시 그러한 참고들을 따를 필요는 없습니다. 이번 장을 끝낼 무렵, 여러분은 이미 리스프 시스템의 키보드 앞에 앉아 4장을 진행하고 있을 것 입니다.</p>
+<ul>
+<li><a href="./lesson_01.html">레슨 01. 필수 - 신택스</a></li>
+<li><a href="./lesson_02.html">레슨 02. 필수 - 평가</a></li>
+<li><a href="./lesson_03.html">레슨 03. 스페셜 폼과 매크로에 대한 예제</a></li>
+<li><a href="./lesson_04.html">레슨 04. 조립과 분해</a></li>
+<li><a href="./lesson_05.html">레슨 05. 네이밍과 아이덴티티</a></li>
+<li><a href="./lesson_06.html">레슨 06. 바인딩 vs 할당</a></li>
+<li><a href="./lesson_07.html">레슨 07. 필수 - 함수 정의</a></li>
+<li><a href="./lesson_08.html">레슨 08. 필수 - 매크로 정의</a></li>
+<li><a href="./lesson_09.html">레슨 09. 필수 - 다중 값</a></li>
+<li><a href="./lesson_10.html">레슨 10. 프리뷰 - 다른 데이터 타입</a></li>
+<li><a href="./lesson_11.html">레슨 11. 필수 - 입력과 출력</a></li>
+<li><a href="./lesson_12.html">레슨 12. 필수 - 리더 매크로</a></li>
+</ul>
 <h2 id="짚고-넘어가기"><a class="header" href="#짚고-넘어가기">짚고 넘어가기</a></h2>
 <ul>
 <li><a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/cltl2.html">Common Lisp : The Language, 2nd Edition</a></li>
@@ -192,7 +206,7 @@
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../ch01/ch01.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../ch02/track_curious.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
@@ -206,7 +220,7 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../ch01/ch01.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../ch02/track_curious.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
